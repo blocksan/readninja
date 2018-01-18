@@ -1,0 +1,16 @@
+{
+    "heading": "My First Post",
+    "body": "<h1> heading of the post</h1><p>hello please read my post</p>",
+    "tags": ["angular", "css"],
+    "banner": "2.png",
+    "difficulty": "medium",
+    "likes": 0,
+    "shares": 0,
+    "views": 0,
+    "claps": 0,
+    "readtime": 3,
+    "dateadded": "3 Jan 2017",
+    "status": "pending",
+    "author": "",
+    "comments": [""]
+}

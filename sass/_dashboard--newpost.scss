@@ -1,0 +1,50 @@
+.newpost--container {
+    font-family: 'Nunito', sans-serif;
+    .banner-div {
+        background: #67a8e4;
+        color: #fff;
+        overflow: hidden;
+        position: relative;
+        max-width: 1140px;
+        height: 600px;
+        max-height: 600px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border-radius: 5px;
+        font-family: 'Nunito', sans-serif;
+        &:before {
+            @include patter--background('/img/pattern_small.svg');
+        }
+        .banner--blog {
+            width: 1140px;
+            height: 600px;
+            position: absolute;
+            border-radius: 5px;
+        }
+        .banner--button {
+            padding: 12px 20px;
+        }
+        input {
+            display: none;
+        }
+    }
+    .blogHeader {
+        border: 0;
+        margin: 20px 0;
+        border-bottom: 1px solid #aaa;
+        height: 100px;
+        line-height: 100px;
+        font-size: 2.5em;
+        padding: 0 5%;
+        outline: 0;
+        font-family: unset;
+        &:focus {
+            background: #eee;
+        }
+    }
+    .ta-bind {
+        font-family: 'Nunito', sans-serif;
+    }
+}

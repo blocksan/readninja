@@ -1,0 +1,78 @@
+<md-content class="template--profileinfo--container" ng-if="!basicload">
+    <div layout="row" layout-sm="column" layout-align="space-around" style="padding:20%">
+        <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    </div>
+</md-content>
+
+<md-content class="template--profileinfo--container" ng-if="basicload">
+    <h2 class="basic--info"> Basic Info </h2>
+
+    <form name="projectForm">
+        <div class="file--container">
+            <div layout="row">
+                <div flex="50" class="half--grid">
+                    <input id="fileInput" type="file" class="file--uploader--hide">
+                    <md-button class="md-raised avatar--button" ng-click="upload()">
+                        Choose Your Avatar
+                    </md-button>
+                </div>
+                <div flex="50" class="half--grid">
+                    <img src="{{author.avatar}}" alt="author image">
+                </div>
+            </div>
+
+        </div>
+        <md-input-container class="md-block">
+            <label>Name</label>
+            <input ng-model="author.name">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Tag line ( Defines you best )</label>
+            <input ng-model="author.tagline" md-maxlength="50">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Username ( readninja.com/@username )</label>
+            <input ng-model="author.username">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Email</label>
+            <input ng-model="author.email">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Password</label>
+            <input type="password" ng-model="author.password">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Confirm Password</label>
+            <input type="password" ng-model="author.confpassword">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Website</label>
+            <input ng-model="author.website">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Biography</label>
+            <textarea ng-model="author.bio" md-maxlength="250" rows="5" md-select-on-focus></textarea>
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>GitHub Username</label>
+            <input ng-model="author.gitU">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Instagram Username</label>
+            <input ng-model="author.instaU">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Facebook Username</label>
+            <input ng-model="author.fbU">
+        </md-input-container>
+        <md-input-container class="md-block">
+            <label>Twitter Username</label>
+            <input ng-model="author.twitU">
+        </md-input-container>
+        <div class="update--loader">
+            <md-button ng-click="saveProfile()" class="md-raised submit-button">Save</md-button>
+            <md-progress-circular class="loadingCir" md-mode="indeterminate" ng-if="updateLoader"></md-progress-circular>
+        </div>
+    </form>
+</md-content>

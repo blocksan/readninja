@@ -1,0 +1,46 @@
+.template--profileinfo--container {
+    text-align: left;
+    width: 70%;
+    padding: 2%;
+    h2.basic--info {
+        margin-top: 0;
+        margin-bottom: 30px;
+        line-height: 50px;
+        border-bottom: 1px solid #eee;
+    }
+    md-input-container {
+        font-size: 1.3em;
+    }
+    .file--container {
+        height: 200px;
+        line-height: 200px;
+        .half--grid {
+            text-align: center;
+            input {
+                display: none;
+            }
+            .avatar--button {
+                padding: 12px 20px;
+                margin-left: 0;
+            }
+            img {
+                width: 180px;
+                height: 180px;
+                border-radius: 5px;
+            }
+        }
+    }
+    .update--loader {
+        .submit-button {
+            text-align: center;
+        }
+        .loadingCir {
+            display: inline;
+            svg {
+                width: 25px !important;
+                height: 25px !important;
+                transform-origin: unset !important;
+            }
+        }
+    }
+}

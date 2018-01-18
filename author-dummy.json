@@ -1,0 +1,20 @@
+{
+    "name": "sandeep ghosh",
+    "username": "ninjasan",
+    "tagline": "I will hustle more rather than settle",
+    "avatar": "/avatar.png",
+    "email": "me@sandeepghosh.com",
+    "password": "admin",
+    "website": "www.readninja.com",
+    "bio": "I am a part time writer, machine learning enthusiasts and MEAN stack developer",
+    "gitU": "",
+    "instaU": "",
+    "fbU": "",
+    "twitU": "",
+    "posts": [""],
+    "numberposts": 0,
+    "likes": 0,
+    "claps": 0,
+    "tags": ["angularjs", "css", "js"]
+
+}

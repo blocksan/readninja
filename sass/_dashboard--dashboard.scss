@@ -1,0 +1,210 @@
+.banner--dashabord {
+    overflow: hidden;
+    background: #33a1a2;
+    color: #fff;
+    &:before {
+        @include patter--background('/img/pattern_small.svg');
+    }
+    .container {
+        text-align: center;
+        padding: 50px 0;
+        font-size: 1.5em;
+        div {
+            z-index: 11;
+        }
+        .banner--dashabord--inner {
+            z-index: unset;
+            h1 {
+                font-family: 'Nunito', sans-serif;
+                height: 50px;
+            }
+            .typed-cursor {
+                display: none;
+            }
+        }
+        .view--topics {
+            padding-left: 20px;
+            padding-right: 20px;
+            font-family: 'Nunito', sans-serif;
+        }
+    }
+}
+
+.md--link--tags {
+    background: #b2b2b2;
+    overflow: hidden;
+    &:before {
+        @include patter--background('/img/pattern_small.svg');
+    }
+    .tech--tags {
+        margin: 20px;
+        padding: 2%;
+        z-index: 1;
+        border-radius: 10px;
+        border: 1px solid #ddd;
+        text-align: center;
+        transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 0px 0px 0px;
+        }
+        &.html5--tag {
+            background: #f7ccac;
+            border-color: #f7ccac;
+        }
+        &.css--tag {
+            background: #c2eeff;
+            border-color: #c2eeff;
+        }
+        &.javascript--tag {
+            background: #fdfccd;
+            border-color: #fdfccd;
+        }
+        &.angular--tag {
+            background: #ffcece;
+            border-color: #ffcece;
+        }
+        &.node--tag {
+            background: #c7f1ae;
+            border-color: #c7f1ae;
+        }
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    }
+}
+
+.md--topic--list--content {
+    padding-bottom: 40px;
+    padding-top: 20px;
+    background: #fff;
+    font-family: 'Nunito', sans-serif;
+    &.grid--list {
+        /* background: url('/img/back-pattern.png') */
+    }
+    &.even--list--content {
+        background: #eee;
+    }
+    .topic--list--header {
+        height: 70px;
+        border-bottom: 3px solid #ddd;
+        line-height: 70px;
+        margin-bottom: 10px;
+        md-list-item {
+            padding-left: 0;
+        }
+        .md-list-item-text {
+            h5 {
+                font-size: 2em;
+                color: #999;
+            }
+            @media only screen and (max-width: 600px) {
+                h5 {
+                    font-size: 1em;
+                }
+            }
+        }
+        .md-avatar {
+            border-radius: 0px;
+        }
+        .more--list--button {
+            text-align: right;
+            .minimal--raised {
+                font-size: 0.7em;
+                padding-left: 15px;
+                padding-right: 15px;
+                box-shadow: 0 0px 2px 0 rgba(0, 0, 0, .26);
+                margin-right: 0;
+            }
+        }
+    }
+    md-card {
+        transition: all 0.2s ease-in-out;
+        -webkit-transition: all 0.2s ease-in-out;
+        &:hover {
+            cursor: pointer;
+            box-shadow: 0px 0px 0px 0px;
+        }
+        md-card-header {
+            padding: 10px 16px;
+            md-card-avatar {
+                height: auto;
+                img {
+                    border-radius: 50%;
+                    width: 30px;
+                    height: 30px;
+                }
+            }
+            md-card-header-text {
+                height: auto;
+                line-height: 30px;
+            }
+        }
+        md-card-header-text {
+            &.push--me--right {
+                span {
+                    font-size: 14px;
+                    height: 20px;
+                    line-height: 18px;
+                    .small--tags {
+                        margin: 0;
+                        min-height: 10px;
+                        max-height: 27px;
+                        line-height: 22px;
+                        &.easy--tag {
+                            background: green;
+                            color: white;
+                        }
+                    }
+                }
+                text-align: right;
+            }
+        }
+        md-card-content {
+            p {
+                font-family: 'Nunito', sans-serif;
+                font-size: 1.1em;
+                font-weight: 300;
+            }
+        }
+        .bottom--options {
+            border-top: 1px solid #ddd;
+            padding: 0;
+            i {
+                font-size: 15px;
+            }
+            div {
+                .md-button {
+                    display: inline-flex;
+                    vertical-align: middle;
+                    text-align: center;
+                    padding-left: 20px;
+                    span {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+    }
+    .flex {
+        &:first-child {
+            md-card {
+                margin-left: 0;
+            }
+        }
+        &:last-child {
+            md-card {
+                margin-right: 0;
+            }
+        }
+    }
+}
+
+.md-topics-chips {
+    margin: 0 auto;
+    border-top: 1px solid #ddd;
+    height: 45px;
+    line-height: 45px;
+}

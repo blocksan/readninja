@@ -1,0 +1,253 @@
+<md-content class=" blog--banner--content blog--no--content" style="background:#fff;" ng-if="!loaded">
+    <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+</md-content>
+<md-content class="blog--banner--content blog--no--content" style="background:#fff;" ng-if="!content && loaded">
+    <div layout="column">
+        <h1>No Content Found !!!</h1>
+
+        <md-button class="md-raised md-primary read--other" ui-sref="home.filter">
+            Read other stuffs
+        </md-button>
+    </div>
+</md-content>
+<md-content class="blog--banner--content" ng-if="content && loaded">
+    <div class="container">
+        <div layout="row">
+            <div flex="100" class="back--hidden">
+                <div class="blog--banner--advert">
+                </div>
+            </div>
+        </div>
+        <div layout="row">
+            <div flex="100" class="back--hidden">
+                <div class="blog--banner--header">
+                    <h1>{{post.heading}}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div layout="row">
+            <div flex="30" class="back--hidden">
+                <div class="blog--banner--writer md-whiteframe-8dp">
+                    <div class="writer--img">
+                        <img src="{{author.avatar}}" alt="">
+                    </div>
+                    <div class="writer--name">
+                        {{author.name}}
+                    </div>
+                    <div class="writer--slug">
+                        ( @{{author.username}} )
+                    </div>
+                    <ul>
+                        <li><i class="fa fa-clock-o" aria-hidden="true"></i>July 09, 2017</li>
+                        <li><i class="fa fa-eye" aria-hidden="true"></i>Views 30,000</li>
+                        <li><i class="fa fa-book" aria-hidden="true"></i>Posts 23</li>
+
+                    </ul>
+                </div>
+            </div>
+            <div flex="70" class="back--hidden banner--img">
+
+                <div class="blog--banner--img md-whiteframe-8dp" style="border-radius:5px;">
+                    <img src="{{post.banner}}" alt="" style="width:100%;height:100%;">
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="container-fluid svg--art--container">
+        <div layout="row">
+            <div flex class="back--hidden">
+                <svg class="diagon-alley" viewBox="0 0 100 100" preserveAspectRatio="none">
+                            <polygon fill="white" points="0,0 50,50 100,0 100,100 0,100"></polygon>
+                            </svg>
+            </div>
+        </div>
+
+    </div>
+</md-content>
+<!-- <div class="container --limited--width">
+    <div layout="column" class="profile--container" ng-cloak>
+        <h1>header</h1><br>
+        <div text-angular ng-model="htmlcontent" class="editor--controls" flex="70"></div>
+    </div>
+    <md-button aria-label="button-label" class="md-rasied" ng-click="saveText()"> save</md-button>
+    <md-button aria-label="button-label" class="md-rasied" ng-click="createAuthor()"> create</md-button>
+
+</div> -->
+<md-content class="blog--article-content" ng-if="content">
+    <div class="container-fluid ">
+        <div layout="row">
+            <div flex="20">
+
+            </div>
+            <div flex="60" class="article--container md-whiteframe-2dp" layout-align="top center" style="background:#fff;">
+                <!-- <div class="article--engage--buttons">
+                    <div layout="row">
+                        <div class="engage-- engage--code">
+                            <md-button class="md-raised md-success"><i class="fa fa-code"></i> CODE</md-button>
+                        </div>
+                        <div class="engage-- engage--clap">
+                            <md-button class="md-raised md-clapping"><img src="/img/clapping.svg" alt=""></md-button>
+                        </div>
+                        <div class="engage-- engage--view"><i class="fa fa-eye" aria-hidden="true"></i> 234</div>
+                    </div>
+                </div> -->
+
+                <p ng-bind-html="post.body"></p>
+
+            </div>
+            <div flex="20">
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid author--content">
+        <div class="author--image">
+            <img src="{{author.avatar}}" alt="">
+        </div>
+        <div class="author--name">
+            <h1>{{author.name}}</h1>
+        </div>
+        <div class="author--bio">
+            <p> {{author.bio}}</p>
+        </div>
+        <div class="author--total--posts">
+            <strong> {{author.posts}} </strong> post(s)
+        </div>
+        <div class="author--social--button">
+            <em> Follow Me On</em>
+            <br>
+            <i class="fa fa-google"></i>
+            <i class="fa fa-facebook"></i>
+            <i class="fa fa-twitter"></i>
+        </div>
+    </div>
+</md-content>
+<md-content class="md--topic--list--content grid--list">
+    <div class="container" layout="column">
+        <div class="topic--list--header" layout="row">
+            <div flex class="child-demo">
+                <md-list>
+                    <md-list-item class="md-1-line">
+                        <img src="img/latest.png" alt="{{item.who}}" class="md-avatar">
+
+                        <div class="md-list-item-text">
+                            <h5>LATEST POSTS</h5>
+                        </div>
+                    </md-list-item>
+                </md-list>
+            </div>
+            <div class="more--list--button" flex>
+                <md-button class="md-raised minimal--raised">More Posts</md-button>
+            </div>
+        </div>
+        <div layout="row">
+            <div flex="25">
+                <md-card class="md-whiteframe-4dp">
+                    <img ng-src="img/3.jpg" class="md-card-image" alt="Washed Out">
+                    <!-- <md-card-title>
+                                                <md-card-title-text>
+                                                    <span class="md-headline">Card header</span>
+                                                </md-card-title-text>
+                                            </md-card-title> -->
+                    <md-card-content>
+                        <p>
+                            The titles of Washed Out's The titles of Washed Out's The titles of Washed Out's
+                        </p>
+                    </md-card-content>
+                    <md-card-content layout="row" class="bottom--options">
+                        <div flex>
+                            <md-button aria-label="total_views"> <i class="material-icons">touch_app</i><span>234</span></md-button>
+                        </div>
+                        <div flex>
+                            <md-button aria-label="likes"> <i class="material-icons">thumb_up</i><span> 5</span></md-button>
+                        </div>
+                        <div flex>
+                            <md-button aria-label="comments"> <i class="material-icons">comment</i> <span>234</span></md-button>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex="25">
+                <md-card class="md-whiteframe-4dp">
+                    <img ng-src="img/4.jpg" class="md-card-image" alt="Washed Out">
+                    <!-- <md-card-title>
+                                                    <md-card-title-text>
+                                                        <span class="md-headline">Card header</span>
+                                                    </md-card-title-text>
+                                                </md-card-title> -->
+                    <md-card-content>
+                        <p>
+                            The titles of Washed Out's The titles of Washed Out's The titles of Washed Out's
+                        </p>
+                    </md-card-content>
+                    <md-card-content layout="row" class="bottom--options">
+                        <div flex>
+                            <md-button aria-label="total_views"> <i class="material-icons">touch_app</i><span>234</span></md-button>
+                        </div>
+                        <div flex>
+                            <md-button aria-label="likes"> <i class="material-icons">thumb_up</i><span> 5</span></md-button>
+                        </div>
+                        <div flex>
+                            <md-button aria-label="comments"> <i class="material-icons">comment</i> <span>234</span></md-button>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex="25">
+                <md-card class="md-whiteframe-4dp">
+                    <img ng-src="img/5.jpg" class="md-card-image" alt="Washed Out">
+                    <!-- <md-card-title>
+                                                        <md-card-title-text>
+                                                            <span class="md-headline">Card header</span>
+                                                        </md-card-title-text>
+                                                    </md-card-title> -->
+                    <md-card-content>
+                        <p>
+                            The titles of Washed Out's The titles of Washed Out's The titles of Washed Out's
+                        </p>
+                    </md-card-content>
+                    <md-card-content layout="row" class="bottom--options">
+                        <div flex>
+                            <md-button aria-label="total_views"> <i class="material-icons">touch_app</i><span>234</span></md-button>
+                        </div>
+                        <div flex>
+                            <md-button aria-label="likes"> <i class="material-icons">thumb_up</i><span> 5</span></md-button>
+                        </div>
+                        <div flex>
+                            <md-button aria-label="comments"> <i class="material-icons">comment</i> <span>234</span></md-button>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+            <div flex="25">
+                <md-card class="md-whiteframe-4dp">
+                    <img ng-src="img/3.jpg" class="md-card-image" alt="Washed Out">
+                    <!-- <md-card-title>
+                                                            <md-card-title-text>
+                                                                <span class="md-headline">Card header</span>
+                                                            </md-card-title-text>
+                                                        </md-card-title> -->
+                    <md-card-content>
+                        <p>
+                            The titles of Washed Out's The titles of Washed Out's The titles of Washed Out's
+                        </p>
+                    </md-card-content>
+                    <md-card-content layout="row" class="bottom--options">
+                        <div flex>
+                            <md-button aria-label="total_views"> <i class="material-icons">touch_app</i><span>234</span></md-button>
+                        </div>
+                        <div flex>
+                            <md-button aria-label="likes"> <i class="material-icons">thumb_up</i><span> 5</span></md-button>
+                        </div>
+                        <div flex>
+                            <md-button aria-label="comments"> <i class="material-icons">comment</i> <span>234</span></md-button>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </div>
+
+        </div>
+    </div>
+</md-content>

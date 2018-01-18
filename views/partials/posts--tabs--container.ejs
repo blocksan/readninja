@@ -1,0 +1,54 @@
+<md-content class="template--posts--container ">
+    <md-nav-bar md-no-ink-bar="false" md-selected-nav-item="currentNavItem" nav-bar-aria-label="navigation links">
+        <md-nav-item md-nav-click="goto('all')" name="page1">
+            All
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('published')" name="page2">
+            Published
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('draft')" name="page3">
+            Draft
+        </md-nav-item>
+        <md-nav-item md-nav-click="goto('pending')" name="page4">
+            Under Review
+        </md-nav-item>
+        <!-- these require actual routing with ui-router or ng-route, so they
+                                      won't work in the demo
+                                      <md-nav-item md-nav-href="#page4" name="page5">Page Four</md-nav-item>
+                                      <md-nav-item md-nav-sref="app.page5" name="page4">Page Five</md-nav-item>
+                                      You can also add options for the <code>ui-sref-opts</code> attribute.
+                                      <md-nav-item md-nav-sref="page6" sref-opts="{reload:true, notify:true}">
+                                        Page Six
+                                      </md-nav-item>
+                                      -->
+    </md-nav-bar>
+    <div class="post--list--content">
+        <md-content class="loading--tab" ng-if="!loadTab">
+            <md-progress-circular class="md-accent" md-mode="indeterminate"></md-progress-circular>
+        </md-content>
+        <md-list-item ng-repeat="post in posts" class="custom--made" ng-if="loadTab">
+            <div flex="70">
+                <div layout="row">
+                    <div flex="40" class="post--image">
+                        <img ng-src="{{post.banner}}" alt="{{post.heading}}" class="img-responsive">
+                    </div>
+                    <div flex="60" class="post--name">
+
+                        <h3>{{post.heading}}</h3>
+                        <div class="extra--post--attr">
+                            <strong> 20 </strong> views &nbsp;&nbsp;
+                            <strong> 40 </strong> claps
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div flex="15" class="post--edit--icon">
+                <i class="fa fa-pencil-square-o"></i>
+            </div>
+            <div flex="15" class="post--delete--icon">
+
+                <i class="fa fa-trash-o" ng-click="deleteConfirm($event,post._id)"></i>
+            </div>
+        </md-list-item>
+    </div>
+</md-content>

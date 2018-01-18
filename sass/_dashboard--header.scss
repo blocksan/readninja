@@ -1,0 +1,161 @@
+.md--search--toolbar {
+    background: rgba(255, 255, 255, 1) !important;
+    color: #444;
+    z-index: 222;
+    .logo--readninja--header {
+        width: 130px;
+        margin-top: -5px;
+        cursor: pointer
+    }
+    @media only screen and (max-width: 480px) {
+        .logo--readninja--header {
+            width: 80px;
+        }
+    }
+    @media only screen and (max-width: 380px) {
+        .logo--readninja--header {
+            width: 75px;
+        }
+        .header--button {
+            padding: 0px !important;
+            min-width: 60px;
+        }
+    }
+    .li--tabs {
+        color: #444;
+        cursor: pointer;
+        line-height: 45px;
+        &.profile--button {
+            .profile--image--tab {
+                margin-top: -10px;
+                display: inline-block;
+                img {
+                    width: 45px;
+                    height: 45px;
+                    line-height: 45px;
+                    border-radius: 50%;
+                }
+                font-size: 0.7em;
+                text-transform: uppercase;
+            }
+        }
+    }
+    .searchbar--button {
+        button {
+            background: #fff;
+            border: 1px solid #fff;
+            font-size: 1.5em;
+            i {
+                color: rgb(76, 175, 80);
+            }
+            outline:0;
+        }
+    }
+    .searchbar--open {
+        height: 282px;
+        width: 100%;
+        top: 65px;
+        padding-left: 0 !important;
+        background: #ffffff;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-content: center;
+        border-bottom: 1px solid #ddd;
+        .search--input--container {
+            position: relative;
+            width: 80%;
+            margin: auto;
+            height: 130px;
+            .search--input {
+                border: 0;
+                color: #444;
+                width: 100%;
+                margin: auto;
+                height: 100px;
+                font-size: 2.6em;
+                position: absolute;
+                left: 0;
+                padding: 50px;
+                padding-right: 90px;
+                font-family: monospace;
+                line-height: 100px;
+                &:focus {
+                    outline: 1px solid $custom--primary--color;
+                    &+i {
+                        opacity: 1;
+                    }
+                }
+            }
+            i {
+                position: absolute;
+                right: 0px;
+                opacity: 0;
+                transition: all 0.3s ease-in-out;
+                top: 1px;
+                line-height: 98px;
+                color: #fcfcfc;
+                background: $custom--primary--color;
+                padding: 0 25px;
+            }
+        }
+    }
+    @media only screen and (max-width: 1024px) {
+        .searchbar--open {
+            height: 180px;
+            top: 57px;
+            .search--input--container {
+                .search--input {
+                    font-size: 1.6em;
+                    padding: 20px;
+                }
+            }
+        }
+    }
+}
+
+md-dialog {
+    &#login-dialog {
+        max-width: 90%;
+        width: 500px;
+        md-toolbar {
+            min-height: 50px !important;
+            .md-toolbar-tools {
+                height: 50px;
+                padding: 0;
+                .login-sign-tab {
+                    width: 50%;
+                    outline: 0;
+                    text-align: center;
+                    height: 50px;
+                    line-height: 50px;
+                    font-size: 0.9em;
+                    &.active--tab {
+                        background: #fff;
+                        color: #000;
+                    }
+                }
+            }
+        }
+        md-dialog-content {
+            padding: 0 50px;
+        }
+        md-dialog-actions {
+            padding: 0 50px;
+            padding-bottom: 20px;
+            .md-button {
+                span {
+                    text-transform: capitalize;
+                }
+            }
+        }
+        @media (max-width:425px) {
+            md-dialog-content {
+                padding: 0 20px;
+            }
+            md-dialog-actions {
+                padding: 0 20px;
+            }
+        }
+    }
+}

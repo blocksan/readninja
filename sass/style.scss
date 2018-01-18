@@ -1,0 +1,64 @@
+    body {
+        .container {
+            max-width: 1240px;
+        }
+        .container-fluid {
+            &.--limited--width {
+                max-width: 1440px;
+            }
+        }
+    }
+    /* @font-face {
+        font-family: nunito-bold;
+        src: url('/fonts/Nunito-Bold.ttf')
+    }
+    
+    @font-face {
+        font-family: nunito-light;
+        src: url('/fonts/Nunito-Light.ttf')
+    }
+    
+    @font-face {
+        font-family: nunito-medium;
+        src: url('/fonts/Nunito-Medium.ttf')
+    }
+    
+    @font-face {
+        font-family: nunito-regular;
+        src: url('/fonts/Nunito-Regular.ttf')
+    } */
+    
+    @font-face {
+        font-family: 'Nunito', sans-serif;
+        @import url('https://fonts.googleapis.com/css?family=Nunito:300,400,700');
+    }
+    
+    @mixin patter--background($img) {
+        content: "";
+        background-image: url($img);
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.06;
+    }
+    
+    $custom--primary--color:#4caf50;
+    body {
+        font-family: 'Nunito', sans-serif;
+        .container--fadeMe {
+            opacity: 0.4;
+        }
+    }
+    
+    @import 'dashboard--header';
+    @import 'dashboard--footer';
+    @import 'dashboard--dashboard';
+    @import 'dashboard--filter';
+    @import 'dashboard--content';
+    @import 'dashboard--carousel';
+    @import 'dashboard--profile';
+    @import 'partial--posts--tabs--container';
+    @import 'partial--profileinfo--container';
+    @import 'dashboard--newpost';

@@ -1,0 +1,116 @@
+<md-toolbar class="md-whiteframe-2dp  md--search--toolbar">
+    <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
+        <div>
+            <img src="/img/Logomakr_8VnYBN.png" alt="logo readninja" class="logo--readninja--header" ui-sref="home.dashboard">
+
+            <md-button class="md-button md-primary header--button" aria-label="tutorials" ng-click="toggleSearch(true)" ui-sref="home.filter">
+                <span>Tutorials</span>
+            </md-button>
+            <md-button class="md-button md-primary header--button" aria-label="articles" ui-sref="home.newpost">
+                <span>Articles</span>
+            </md-button>
+
+        </div>
+        <div class="searchbar--button">
+            <button aria-label="search item" ng-click="toggleSearch()">
+                <i class="fa fa-search" ng-if="search_toggle" aria-hidden="true"></i>
+                <i class="fa fa-times" ng-if="!search_toggle" aria-hidden="true"></i>   
+            </button>
+        </div>
+        <div class="li--tabs signup" ng-if="!logged" hide-sm hide-xs>
+            <md-button class="md-raised " aria-label="Learn More" ng-click="showPrerenderedDialog($event)">
+                Login
+            </md-button>
+            <md-button class="md-raised md-primary" ui-sref="home.profile.posts" aria-label="Learn More">
+                Join Us
+            </md-button>
+        </div>
+        <div class="li--tabs profile--button" ng-if="logged" hide-sm hide-xs>
+            <md-button class="md-primary md-raised" aria-label="create new post" ui-sref="home.newpost">
+                + new post
+            </md-button>
+            <div class="profile--image--tab" aria-label="Learn More" ui-sref="home.profile.posts">
+                <img src="{{user.avatar}}" alt=""> Profile
+            </div>
+            <md-button class="md-default" ng-click="logout()" aria-label="logout" style="background:#ddd">
+                Logout
+            </md-button>
+        </div>
+        <md-button class="md-icon-button" aria-label="menu" style="color:#000" hide-gt-sm>
+            <i class="material-icons">more_vert</i>
+
+        </md-button>
+    </div>
+    <div class="container-fluid searchbar--open" ng-if="!search_toggle">
+        <div class="search--input--container">
+            <input type="text" placeholder="dig me in..." class="search--input">
+            <i class="fa fa-search"></i>
+        </div>
+    </div>
+</md-toolbar>
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="myDialog">
+        <md-dialog id="login-dialog" aria-label="Login" ng-cloak>
+            <form name="loginForm" ng-submit="dialog.login()">
+                <md-toolbar>
+                    <div class="md-toolbar-tools">
+                        <div class="login-sign-tab" ng-class="{'active--tab':loginTab}" ng-click="changeLoginTab('login')">Login</div>
+                        <div class="login-sign-tab" ng-class="{'active--tab':!loginTab}" ng-click="changeLoginTab('register')">Join Us</div>
+                    </div>
+
+                </md-toolbar>
+
+                <md-dialog-content ng-if="loginTab">
+                    <div class="md-dialog-content">
+                        <md-input-container class="md-block">
+                            <label>Username or Email</label>
+                            <input name="username" ng-model="formuser.username" md-autofocus required />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Password</label>
+                            <input type="password" name="password" ng-model="formuser.password" required />
+                        </md-input-container>
+                        <a href="" class="md-primary">Forgot Password?</a>
+                        <span flex></span>
+                    </div>
+
+                </md-dialog-content>
+                <md-dialog-content ng-if="!loginTab">
+                    <div class="md-dialog-content">
+                        <md-input-container class="md-block">
+                            <label>Username</label>
+                            <input name="name" ng-model="formuser.name" md-autofocus required />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Email</label>
+                            <input name="email" ng-model="formuser.email" md-autofocus required />
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Password</label>
+                            <input type="password" name="password" ng-model="formuser.password" required />
+                        </md-input-container>
+                        <span flex></span>
+                    </div>
+
+                </md-dialog-content>
+                <md-dialog-actions layout="row" ng-if="loginTab">
+
+                    <md-button class="md-raised md-primary" ng-click="loginFacebook('login')" style="background:#39579b;color:#fff"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</md-button>
+                    <!-- <md-button class="md-raised md-black-custom" style="background:#000;color:#fff"><i class="fa fa-github" aria-hidden="true"></i> GitHub</md-button> -->
+                    <!--  <md-button class="md-raised md-warn" ng-click="loginGoogle('login')"><i class="fa fa-google-plus" aria-hidden="true"></i> Google</md-button>
+                    -->&nbsp; -or-
+                    <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-primary" ng-click="login()">Login</md-button>
+
+                </md-dialog-actions>
+                <md-dialog-actions layout="row" ng-if="!loginTab">
+                    <md-button class="md-raised md-primary" ng-click="loginFacebook('register')" style="background:#39579b;color:#fff"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</md-button>
+                    <!-- <md-button class="md-raised md-black-custom" style="background:#000;color:#fff"><i class="fa fa-github" aria-hidden="true"></i> GitHub</md-button> -->
+                    <!--   <md-button class="md-raised md-warn" ng-click="loginGoogle('register')"><i class="fa fa-google-plus" aria-hidden="true"></i> Google</md-button>
+                   -->&nbsp; -or-
+                    <md-button type="submit" ng-disabled="loginForm.$invalid" class="md-raised md-primary" ng-click="register()">Join Us</md-button>
+
+                </md-dialog-actions>
+            </form>
+        </md-dialog>
+    </div>
+</div>

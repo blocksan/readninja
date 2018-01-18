@@ -1,0 +1,70 @@
+<md-content>
+    <div class="container-fluid --limited--width">
+        <div layout="column" class="profile--container" ng-cloak>
+
+            <section layout="row" flex>
+
+                <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-xs')" md-whiteframe="2">
+                    <md-content>
+                        <div class="container-fluid author--content">
+                            <div class="author--image">
+                                <img src="{{authorSide.avatar}}" alt="">
+                            </div>
+
+                            <div class="author--name">
+                                <h1>@{{authorSide.username}}</h1>
+                            </div>
+                            <div class="author--bio">
+                                <p> {{authorSide.tagline}}</p>
+                            </div>
+                            <div class="author--small--attr">
+                                <div class="col-lg-4 small--attr md-whiteframe-2dp">
+                                    <strong>{{authorSide.post_id.length}}</strong>
+                                    <h4>Post<span ng-if="authorSide.post_id.length >1">s</span></h4>
+
+                                </div>
+                                <div class="col-lg-4 small--attr md-whiteframe-2dp">
+                                    <strong>10</strong>
+                                    <h4>Views</h4>
+                                </div>
+                                <div class="col-lg-4 small--attr md-whiteframe-2dp">
+                                    <strong>100</strong>
+                                    <h4>Claps</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </md-content>
+                    <md-content>
+                        <div class="profile--tabs " ng-class="home_tab ? '--active' : ''" ng-click="changeTab('home.profile.home')" ui-sref="home.profile.home">
+                            Home
+                        </div>
+                    </md-content>
+                    <md-content>
+                        <div class="profile--tabs" ng-class="posts_tab ? '--active' : ''" ng-click="changeTab('home.profile.posts')" ui-sref="home.profile.posts">
+                            Posts
+                        </div>
+                    </md-content>
+                    <md-content>
+                        <div class="profile--tabs" ng-class="profile_tab ? '--active' : ''" ng-click="changeTab('home.profile.settings')" ui-sref="home.profile.settings">
+                            Profile
+                        </div>
+                    </md-content>
+                </md-sidenav>
+
+                <md-content flex class="md--right--sidenav md-whiteframe-2dp">
+
+                    <div layout="column" layout-align="top center" ui-view>
+
+                    </div>
+
+                    <div flex></div>
+
+                </md-content>
+
+
+            </section>
+
+        </div>
+    </div>
+
+</md-content>

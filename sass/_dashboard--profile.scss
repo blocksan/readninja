@@ -1,0 +1,80 @@
+.profile--container {
+    margin: 40px 0px;
+    .md-sidenav-left {
+        text-align: center;
+        width: 380px;
+        height: min-content;
+        max-height: 550px;
+        .author--content {
+            text-align: center;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 0;
+            .author--image {
+                margin-top: 20px;
+                img {
+                    width: 100px;
+                    height: 100px;
+                }
+            }
+            .author--name {
+                h1 {
+                    font-size: 2.5em;
+                }
+            }
+            .author--bio {
+                font-size: 1.2em;
+                color: #999;
+                max-width: 420px;
+                margin: 0 auto;
+            }
+            .author--small--attr {
+                margin-right: 0;
+                width: 100%;
+                display: inline-block;
+                .small--attr {
+                    width: 30%;
+                    margin: 5px;
+                    border-radius: 2px;
+                    color: #777;
+                    background: #eeeeee;
+                    /* Old browsers */
+                    background: -moz-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+                    /* FF3.6-15 */
+                    background: -webkit-linear-gradient(top, #eeeeee 0%, #cccccc 100%);
+                    /* Chrome10-25,Safari5.1-6 */
+                    background: linear-gradient(to bottom, #eeeeee 0%, #cccccc 100%);
+                    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+                    strong {
+                        font-size: 1.9em;
+                    }
+                    h4 {
+                        margin-top: 0px;
+                    }
+                }
+            }
+        }
+        md-content {
+            .profile--tabs {
+                font-size: 1.2em;
+                cursor: pointer;
+                line-height: 55px;
+                height: 60px;
+                font-family: nunito-light;
+                border-bottom: 1px solid #ddd;
+                &.--active {
+                    background: #eee;
+                }
+                &:focus {
+                    outline: 0;
+                }
+            }
+        }
+    }
+    md-content {
+        background: rgb(255, 255, 255);
+        &.md--right--sidenav {
+            margin-left: 10px;
+        }
+    }
+}

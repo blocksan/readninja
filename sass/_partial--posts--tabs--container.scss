@@ -1,0 +1,53 @@
+.template--posts--container {
+    width: 100%;
+    padding: 0 20px;
+    md-nav-bar {
+        .md-nav-item {
+            span {
+                text-transform: capitalize;
+            }
+        }
+    }
+    .post--list--content {
+        padding-top: 20px;
+        md-list-item {
+            &.custom--made {
+                padding: 10px;
+                .post--image {
+                    margin-right: 30px;
+                    img {
+                        border-radius: 10px;
+                    }
+                }
+                .post--name {
+                    align-items: center;
+                    justify-content: center;
+                    .extra--post--attr {
+                        position: absolute;
+                        bottom: 10px;
+                        strong {
+                            font-size: 1.5em;
+                        }
+                    }
+                }
+                .post--edit--icon,
+                .post--delete--icon {
+                    font-size: 1.5em;
+                    text-align: center;
+                }
+                transition: all 0.3s ease-in-out;
+                &:hover {
+                    cursor: pointer;
+                    border-radius: 5px;
+                    background: whitesmoke;
+                }
+            }
+        }
+        .loading--tab {
+            display: flex;
+            padding: 20%;
+            align-items: center;
+            justify-content: center;
+        }
+    }
+}

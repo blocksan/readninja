@@ -1,0 +1,117 @@
+.filter--container {
+    .md-sidenav-left {
+        width: 240px;
+        height: 950px;
+        md-content {
+            fieldset {
+                legend {
+                    margin-bottom: 0;
+                    font-size: 15px;
+                    line-height: 30px;
+                    background: #eee;
+                    padding: 0 20px;
+                    height: 40px;
+                    border-bottom: 0;
+                    line-height: 35px;
+                }
+                &.tags--filter {
+                    .tags--checkboxes {
+                        max-height: 160px;
+                        overflow: hidden;
+                        overflow-y: scroll;
+                    }
+                }
+                .layout-wrap {
+                    margin: 15px;
+                    .md-label {
+                        margin-top: -10px
+                    }
+                }
+                md-radio-group {
+                    margin: 15px;
+                    display: inherit;
+                }
+            }
+        }
+        @media only screen and (max-width: 960px) {
+            .md-sidenav-left {
+                min-width: 200px !important;
+                max-width: 200px !important;
+            }
+        }
+    }
+    .filtered--contents {
+        .filter--search {
+            width: 100%;
+            .filter--search--input {
+                margin-top: 0;
+                font-size: 1.1em;
+                .md-input {
+                    padding-left: 20px;
+                    font-size: 2em;
+                    color: #999;
+                    font-family: monospace;
+                }
+            }
+        }
+        .cards--containers {
+            md-card {
+                margin: 8px;
+                width: 31.8%;
+                md-card-content {
+                    padding: 5px 16px;
+                }
+            }
+            @media only screen and (max-width: 1240px) {
+                md-card {
+                    margin: 6px;
+                    width: 31.5%;
+                }
+            }
+            @media only screen and (max-width: 767px) {
+                md-card {
+                    width: 30.5%;
+                }
+            }
+            @media only screen and (max-width: 425px) {
+                md-card {
+                    width: 46%;
+                }
+            }
+            @media only screen and (max-width: 424px) {
+                md-card {
+                    width: 100%;
+                }
+            }
+        }
+        .filtered--contents--pagination {
+            margin: 50px 20px;
+            button {
+                &:first-child {
+                    background-color: #fff;
+                    span {
+                        position: absolute;
+                        top: 5px;
+                        left: 10px;
+                        color: #999;
+                    }
+                    &:hover {
+                        background-color: #fff;
+                    }
+                }
+                &:last-child {
+                    background-color: #fff;
+                    span {
+                        position: absolute;
+                        top: 5px;
+                        left: 10px;
+                        color: #999;
+                    }
+                    &:hover {
+                        background-color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

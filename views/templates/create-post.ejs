@@ -1,0 +1,33 @@
+<style>
+    .editor--controls {
+        text-align: center;
+    }
+    
+    .editor--controls .btn-group {
+        float: none;
+    }
+    
+    .editor--controls .btn {
+        padding: 15px 25px;
+        border: 0px;
+    }
+</style>
+<md-content>
+    <div class="container --limited--width">
+        <div layout="column" class="newpost--container" ng-cloak>
+            <div class="banner-div" flex>
+                <img ng-src="{{imageSrc}}" class="banner--blog img-responsive" />
+                <input id="bannerInput" ng-file-select="onFileSelect($files)" type="file" class="file--uploader--hide" ng-model="imageSrc">
+                <md-button class="md-raised banner--button" ng-click="upload()">
+                    Upload Banner (1140 X 600)
+                </md-button>
+            </div>
+
+            <input type="text" ng-model="blogHeader" class="blogHeader" placeholder="Header of the Blog"><br>
+            <div text-angular ng-model="htmlcontent" class="editor--controls" flex="70"></div>
+        </div>
+        <md-button aria-label="button-label" class="md-rasied" ng-click="saveText()"> save</md-button>
+        <p ng-bind-html="htmlPost"></p>
+    </div>
+
+</md-content>
