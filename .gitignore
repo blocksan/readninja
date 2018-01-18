@@ -1,1 +1,4 @@
 node_modules/
+npm-debug.log.*
+public/js/hackathon.*
+public/css/style.*
