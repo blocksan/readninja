@@ -2,9 +2,9 @@
     overflow: hidden;
     background: #33a1a2;
     color: #fff;
-    &:before {
-        @include patter--background('/img/pattern_small.svg');
-    }
+//     &:before {
+//         @include patter--background('/img/pattern_small.svg');
+//     }
     .container {
         text-align: center;
         padding: 50px 0;

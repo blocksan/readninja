@@ -31,7 +31,7 @@
     <div notifybar style="position:fixed;top:0;right:0;z-index:11111"></div>
     <md-content ng-controller="landingController">
         <ng-include src="'partials/header'"></ng-include>
-        <div style="padding-top:65px;" ng-class="!search_toggle ? 'container--fadeMe' : ''" ui-view></div>
+        <div ng-class="!search_toggle ? 'container--fadeMe' : ''" ui-view></div>
         <ng-include src="'partials/footer'" ng-if="!hideFooter"></ng-include>
 
         <%include ./scripts%>
