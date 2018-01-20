@@ -59,6 +59,7 @@
                 }); */
             $scope.users = response;
             //console.log(response, 'all post');
+            $scope.filteredUsers = [];
             $scope.filteredUsers = $scope.users;
             $scope.searchString = '';
 
