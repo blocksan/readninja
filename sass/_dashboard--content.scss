@@ -15,8 +15,10 @@
             //bottom: 0;
         }
     }
-    &:before {
-        @include patter--background('/img/pattern.svg');
+    @media only screen and (min-width: 768px) {
+        &:before {
+            @include patter--background('/img/pattern_small.svg');
+        }
     }
     .back--hidden {
         z-index: 1;

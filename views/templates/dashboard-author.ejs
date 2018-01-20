@@ -1,10 +1,15 @@
 <md-content>
     <div class="container-fluid --limited--width">
         <div layout="column" class="profile--container" ng-cloak>
-
+            <!-- <md-button class="md-raised md-primary">Click me</md-button>
+            <md-button class="md-raised md-accent">or maybe me</md-button>
+            <md-button class="md-raised md-warn">Careful</md-button>
+            <md-button class="md-raised md-primary">Click me</md-button>
+            <md-button class="md-raised md-primary md-hue-1">Click me</md-button>
+            <md-button class="md-raised md-primary md-hue-2">Click me</md-button> -->
             <section layout="row" flex>
 
-                <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-xs')" md-whiteframe="2">
+                <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" md-whiteframe="1">
                     <md-content>
                         <div class="container-fluid author--content">
                             <div class="author--image">
@@ -15,9 +20,15 @@
                                 <h1>@{{authorSide.username}}</h1>
                             </div>
                             <div class="author--bio">
-                                <p> {{authorSide.tagline}}</p>
+                                <em> {{authorSide.tagline}}</em>
                             </div>
-                            <div class="author--small--attr">
+                            <br>
+                            <!-- <ul class="ul--author--attr" layout="row" layout-align="space-between center">
+                                <li class="author--attr">2343214</li>
+                                <li class="author--attr">234234</li>
+                                <li class="author--attr">23432</li>
+                            </ul> -->
+                            <!-- <div class="author--small--attr">
                                 <div class="col-lg-4 small--attr md-whiteframe-2dp">
                                     <strong>{{authorSide.post_id.length}}</strong>
                                     <h4>Post<span ng-if="authorSide.post_id.length >1">s</span></h4>
@@ -29,36 +40,34 @@
                                 </div>
                                 <div class="col-lg-4 small--attr md-whiteframe-2dp">
                                     <strong>100</strong>
-                                    <h4>Claps</h4>
+                                     <h4>Claps</h4>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                     </md-content>
-                    <md-content>
-                        <div class="profile--tabs " ng-class="home_tab ? '--active' : ''" ng-click="changeTab('home.profile.home')" ui-sref="home.profile.home">
-                            Home
-                        </div>
-                    </md-content>
-                    <md-content>
-                        <div class="profile--tabs" ng-class="posts_tab ? '--active' : ''" ng-click="changeTab('home.profile.posts')" ui-sref="home.profile.posts">
-                            Posts
-                        </div>
-                    </md-content>
-                    <md-content>
-                        <div class="profile--tabs" ng-class="profile_tab ? '--active' : ''" ng-click="changeTab('home.profile.settings')" ui-sref="home.profile.settings">
-                            Profile
-                        </div>
-                    </md-content>
+                    <ul class="ul--profile--tabs">
+                        <li class="profile--tabs" ng-class="home_tab ? '--active' : ''" ng-click="changeTab('home.profile.home')" ui-sref="home.profile.home">
+                            <i class="material-icons">home</i>
+                            <p> HOME</p>
+                        </li>
+                        <li class="profile--tabs" ng-class="posts_tab ? '--active' : ''" ng-click="changeTab('home.profile.posts')" ui-sref="home.profile.posts">
+                            <i class="material-icons">library_books</i>
+                            <p> POSTS </p>
+                        </li>
+                        <li class="profile--tabs" ng-class="profile_tab ? '--active' : ''" ng-click="changeTab('home.profile.settings')" ui-sref="home.profile.settings">
+                            <i class="material-icons">settings</i>
+                            <p> PROFILE </p>
+                        </li>
+                        <li class="profile--tabs" ng-class="new_tab ? '--active' : ''" ui-sref="home.newpost">
+                            <i class="material-icons">note_add</i>
+                            <p> NEW POST </p>
+                        </li>
+                    </ul>
                 </md-sidenav>
 
-                <md-content flex class="md--right--sidenav md-whiteframe-2dp">
+                <md-content flex class="md--right--sidenav ">
 
-                    <div layout="column" layout-align="top center" ui-view>
-
-                    </div>
-
-                    <div flex></div>
-
+                    <ui-view>
                 </md-content>
 
 

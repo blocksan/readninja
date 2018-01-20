@@ -1,10 +1,12 @@
 .banner--dashabord {
     overflow: hidden;
-    background: #33a1a2;
+    background: #27bfee;
     color: #fff;
-//     &:before {
-//         @include patter--background('/img/pattern_small.svg');
-//     }
+    @media only screen and (min-width: 768px) {
+        &:before {
+            @include patter--background('/img/pattern_small.svg');
+        }
+    }
     .container {
         text-align: center;
         padding: 50px 0;
@@ -33,8 +35,10 @@
 .md--link--tags {
     background: #b2b2b2;
     overflow: hidden;
-    &:before {
-        @include patter--background('/img/pattern_small.svg');
+    @media only screen and (min-width: 768px) {
+        &:before {
+            @include patter--background('/img/pattern_small.svg');
+        }
     }
     .tech--tags {
         margin: 20px;
@@ -82,7 +86,7 @@
     background: #fff;
     font-family: 'Nunito', sans-serif;
     &.grid--list {
-        /* background: url('/img/back-pattern.png') */
+        background: url('/img/back-pattern.png')
     }
     &.even--list--content {
         background: #eee;

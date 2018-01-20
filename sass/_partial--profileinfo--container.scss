@@ -1,7 +1,9 @@
 .template--profileinfo--container {
     text-align: left;
     width: 70%;
+    margin: auto;
     padding: 2%;
+    font-family: 'Nunito', sans-serif;
     h2.basic--info {
         margin-top: 0;
         margin-bottom: 30px;
@@ -9,7 +11,10 @@
         border-bottom: 1px solid #eee;
     }
     md-input-container {
-        font-size: 1.3em;
+        font-size: 1.22em;
+        label {
+            font-weight: normal;
+        }
     }
     .file--container {
         height: 200px;

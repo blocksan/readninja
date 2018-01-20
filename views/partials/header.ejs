@@ -3,10 +3,10 @@
         <div>
             <img src="/img/Logomakr_8VnYBN.png" alt="logo readninja" class="logo--readninja--header" ui-sref="home.dashboard">
 
-            <md-button class="md-button md-primary header--button" aria-label="tutorials" ng-click="toggleSearch(true)" ui-sref="home.filter">
+            <md-button class="md-button md-default header--button" aria-label="tutorials" ng-click="toggleSearch(true)" ui-sref="home.filter">
                 <span>Tutorials</span>
             </md-button>
-            <md-button class="md-button md-primary header--button" aria-label="articles" ui-sref="home.newpost">
+            <md-button class="md-button md-default header--button" aria-label="articles" >
                 <span>Articles</span>
             </md-button>
 
@@ -30,7 +30,7 @@
                 + new post
             </md-button>
             <div class="profile--image--tab" aria-label="Learn More" ui-sref="home.profile.posts">
-                <img src="{{user.avatar}}" alt=""> Profile
+                <img src="{{user.avatar}}" alt="">
             </div>
             <md-button class="md-default" ng-click="logout()" aria-label="logout" style="background:#ddd">
                 Logout

@@ -7,6 +7,9 @@
         margin-top: -5px;
         cursor: pointer
     }
+    .header--button {
+        color: #999;
+    }
     @media only screen and (max-width: 480px) {
         .logo--readninja--header {
             width: 80px;
@@ -17,8 +20,20 @@
             width: 75px;
         }
         .header--button {
+            color: #999;
             padding: 0px !important;
             min-width: 60px;
+        }
+    }
+    @media only screen and (max-width:360px) {
+        .header--button {
+            color: #999;
+            span {
+                font-size: 0.7em;
+            }
+            margin: 0;
+            padding: 0px !important;
+            min-width: 40px;
         }
     }
     .li--tabs {
