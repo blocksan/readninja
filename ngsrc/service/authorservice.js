@@ -26,11 +26,13 @@
                 })
                 return deferred.promise;
             },
-            updateAuthor: function(param) {
+            updateAuthor: function(file) {
                 var deferred = $q.defer();
 
-                console.log('create author', param)
-                $http.post('/apidata/updateAuthor', { param: param }).then(function(result) {
+                $http.post('/apidata/updateAuthor', file, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                }).then(function(result) {
 
                     deferred.resolve(result.data);
                 }, function(err) {

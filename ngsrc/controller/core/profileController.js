@@ -13,9 +13,7 @@
         }, function(err) {
             console.log(err)
         })
-        $scope.upload = function() {
-            angular.element(document.querySelector('#fileInput')).click();
-        };
+
 
         function changeTabFun(param) {
             if (param === 'home.profile.settings') {
@@ -37,7 +35,6 @@
         $scope.changeTab = function(param) {
             changeTabFun(param)
         }
-        console.log($state.current.name)
     }])
 
 })();

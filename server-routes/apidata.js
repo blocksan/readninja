@@ -20,16 +20,36 @@ cloudinary.config({
 router.get('/dashboard-author', authenticate, function(req, res, next) {
     res.render('templates/dashboard-author');
 });
-router.post('/updateAuthor', authenticate, function(req, res) {
+router.post('/updateAuthor', authenticate, upload.any(), function(req, res) {
     // console.log(req.body.param)
+    console.log(req.files)
+    if (req.files.length) {
+        Promise.all([cloudinary.uploader.upload(req.files[0].path, { crop: "fill", width: 100, height: 100 })
+            .then(function(result) {
+                var body = _.pick(req.body, ["name", "avatar", "tagline", "username", "email", "password", "website", "bio", "gitU", "instaU", "fbU", "twitU", "numberposts", "likes", "claps", "tags"]);
+                body.avatar = result.secure_url;
+                console.log(body)
+                users.findOneAndUpdate({ _id: req.user._id }, body, { upsert: true }).exec()
+                    .then(function(user) {
+                        res.status(200).send({ msg: 'author updated ' });
+                    }).catch(function(err) {
+                        res.status(400).send({ err: 'error in updating author' });
+                    })
+            }).catch(function(err) {
+                res.status(400).send({ err: 'error in updating author' });
+            })
+        ]);
+    } else {
+        var body = _.pick(req.body, ["name", "tagline", "username", "email", "password", "website", "bio", "gitU", "instaU", "fbU", "twitU", "numberposts", "likes", "claps", "tags"]);
 
-    var body = _.pick(req.body.param, ["name", "avatar", "tagline", "username", "email", "password", "website", "bio", "gitU", "instaU", "fbU", "twitU", "numberposts", "likes", "claps", "tags"]);
-    users.findOneAndUpdate({ _id: req.user._id }, body, { upsert: true }).exec()
-        .then(function(user) {
-            res.status(200).send({ msg: 'author created ' });
-        }, function(err) {
-            res.status(400).send({ err: 'error in updating author' });
-        })
+        users.findOneAndUpdate({ _id: req.user._id }, body, { upsert: true }).exec()
+            .then(function(user) {
+                res.status(200).send({ msg: 'author updated ' });
+            }).catch(function(err) {
+                res.status(400).send({ err: 'error in updating author' });
+            })
+    }
+
 
 
     //user.save().then(function(author) {

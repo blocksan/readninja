@@ -21,7 +21,7 @@
             'hackathon.service.postservice',
             'hackathon.service.authorservice',
             'hackathon.service.authService',
-            'hackathon.partials.settingsController',
+            'hackathon.partials.basicSettingsController',
             'hackthaon.partials.postsController',
             'hackathon.directive.prismdirective'
         ])

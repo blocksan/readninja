@@ -49,7 +49,7 @@
                 .state('home.profile.settings', {
                     url: '/settings',
                     templateUrl: '/partials/settings',
-                    controller: 'settingsController'
+                    controller: 'basicSettingsController'
                 }).state('home.profile.home', {
                     url: '/home',
                     templateUrl: '/partials/home'

@@ -17,7 +17,7 @@ router.get('/postsTabs', function(req, res, next) {
 });
 router.get('/settings', function(req, res, next) {
 
-    res.render('partials/basic--info--container');
+    res.render('partials/basic--info');
 });
 router.get('/home', function(req, res, next) {
 

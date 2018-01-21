@@ -11,13 +11,17 @@
         <div class="file--container">
             <div layout="row">
                 <div flex="50" class="half--grid">
-                    <input id="fileInput" type="file" class="file--uploader--hide">
+                    <input id="fileInput" ng-file-select="onFileSelect($files)" ng-model="imgSrc" type="file" class="file--uploader--hide">
                     <md-button class="md-raised avatar--button" ng-click="upload()">
-                        Choose Your Avatar
+                        Choose Your Avatar 
                     </md-button>
                 </div>
-                <div flex="50" class="half--grid">
+                
+                <div flex="50" class="half--grid" ng-if="!imgSrc">
                     <img src="{{author.avatar}}" alt="author image">
+                </div>
+                <div flex="50" class="half--grid" ng-if="imgSrc">
+                    <img src="{{imgSrc}}" alt="author image">
                 </div>
             </div>
 

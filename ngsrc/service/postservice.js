@@ -16,7 +16,6 @@
             },
             createPost: function(file) {
                 var deferred = $q.defer();
-                console.log(file, '-----')
                 $http.post('/apidata/createpost', file, {
                     transformRequest: angular.identity,
                     headers: { 'Content-Type': undefined }
