@@ -27,3 +27,6 @@ This README would normally document whatever steps are necessary to get your app
 
 * Repo owner or admin
 * Other community or team contact
+
+### Todo task ###
+create option for uploading post with number of options like number of min to read, category, technology used etc.....
