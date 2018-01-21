@@ -7,6 +7,8 @@
          * Supplies a function that will continue to operate until the
          * time is up.
          */
+        $scope.filteredUsers = [];
+
         function debounce(func, wait, context) {
             var timer;
 
@@ -59,7 +61,7 @@
                 }); */
             $scope.users = response;
             //console.log(response, 'all post');
-            $scope.filteredUsers = [];
+
             $scope.filteredUsers = $scope.users;
             $scope.searchString = '';
 

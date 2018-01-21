@@ -12,28 +12,35 @@
         padding-top: 20px;
         md-list-item {
             &.custom--made {
-                padding: 10px;
+                padding: 15px;
+                border-bottom: 1px solid #ededed;
                 .post--image {
-                    margin-right: 30px;
                     img {
-                        border-radius: 10px;
+                        width: 260px;
+                        height: 85px;
+                        border-radius: 5px;
                     }
                 }
                 .post--name {
-                    align-items: center;
-                    justify-content: center;
+                    margin-left: 5px;
+                    h4 {
+                        margin-top: 0;
+                    }
                     .extra--post--attr {
                         position: absolute;
                         bottom: 10px;
                         strong {
-                            font-size: 1.5em;
+                            font-size: 1.3em;
                         }
                     }
                 }
                 .post--edit--icon,
                 .post--delete--icon {
-                    font-size: 1.5em;
+                    font-size: 1.2em;
                     text-align: center;
+                }
+                .post--delete--icon {
+                    color: #f81f1f;
                 }
                 transition: all 0.3s ease-in-out;
                 &:hover {

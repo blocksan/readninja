@@ -1,4 +1,4 @@
-<div class="container-fluid --limited--width" style="padding:100px 40px;">
+<div class="container-fluid --limited--width" style="padding-top:100px">
     <div ng-controller="filterController as vm" layout="column" class="filter--container" ng-cloak>
         <md-button aria-label="button-label" ng-click="toggleSideNav()" hide-gt-sm> filter </md-button>
         <section layout="row" flex>
@@ -77,7 +77,7 @@
                             </md-card-content>
                         </md-card>
                     </div>
-                    <md-collection-pagination class="filtered--contents--pagination" per-page="3" collection="filteredUsers" paginated-collection="displayposts"></md-collection-pagination>
+                    <md-collection-pagination class="filtered--contents--pagination" per-page="9" collection="filteredUsers" paginated-collection="displayposts"></md-collection-pagination>
                 </div>
 
                 <div flex></div>

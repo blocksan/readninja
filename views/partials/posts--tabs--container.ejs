@@ -29,12 +29,12 @@
         <md-list-item ng-repeat="post in posts" class="custom--made" ng-if="loadTab">
             <div flex="70">
                 <div layout="row">
-                    <div flex="40" class="post--image">
+                    <div flex="40" flex-xs="80" class="post--image">
                         <img ng-src="{{post.banner}}" alt="{{post.heading}}" class="img-responsive">
                     </div>
-                    <div flex="60" class="post--name">
+                    <div flex="60" class="post--name" hide-xs>
 
-                        <h3>{{post.heading}}</h3>
+                        <h4>{{post.heading}}</h4>
                         <div class="extra--post--attr">
                             <strong> 20 </strong> views &nbsp;&nbsp;
                             <strong> 40 </strong> claps
