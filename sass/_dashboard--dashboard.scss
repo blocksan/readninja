@@ -6,6 +6,11 @@
         &:before {
             @include patter--background('/img/pattern_small.svg');
         }
+        .container {
+            #headerTagLine {
+                font-size: 2em;
+            }
+        }
     }
     .container {
         text-align: center;
@@ -19,6 +24,7 @@
             h1 {
                 font-family: 'Nunito', sans-serif;
                 height: 50px;
+                font-size: 1.4em;
             }
             .typed-cursor {
                 display: none;

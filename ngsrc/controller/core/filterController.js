@@ -38,16 +38,7 @@
             }, 200);
         }
 
-        function buildToggler(navID) {
-            return function() {
-                // Component lookup should always be available since we are not using `ng-if`
-                $mdSidenav(navID)
-                    .toggle()
-                    .then(function() {
-                        $log.debug("toggle " + navID + " is done");
-                    });
-            };
-        }
+
 
         $scope.users = [];
         var allPostPromise = postservice.allPost();
@@ -73,7 +64,6 @@
         }, function(error) {
             console.log(error)
         });
-        console.log($scope.users);
         //$scope.users = [];
         /* $scope.posts.forEach((obj, i) => {
             $scope.users[i] = obj.heading

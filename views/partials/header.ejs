@@ -6,15 +6,15 @@
             <md-button class="md-button md-default header--button" aria-label="tutorials" ng-click="toggleSearch(true)" ui-sref="home.filter">
                 <span>Tutorials</span>
             </md-button>
-            <md-button class="md-button md-default header--button" aria-label="articles" >
+            <md-button class="md-button md-default header--button" aria-label="articles">
                 <span>Articles</span>
             </md-button>
 
         </div>
         <div class="searchbar--button">
             <button aria-label="search item" ng-click="toggleSearch()">
-                <i class="fa fa-search" ng-if="search_toggle" aria-hidden="true"></i>
-                <i class="fa fa-times" ng-if="!search_toggle" aria-hidden="true"></i>   
+            <i class="material-icons" ng-if="search_toggle" aria-hidden="true"> search</i>
+             <i class="material-icons" ng-if="!search_toggle" aria-hidden="true"> close</i>
             </button>
         </div>
         <div class="li--tabs signup" ng-if="!logged" hide-sm hide-xs>
@@ -41,10 +41,26 @@
 
         </md-button>
     </div>
-    <div class="container-fluid searchbar--open" ng-if="!search_toggle">
-        <div class="search--input--container">
-            <input type="text" placeholder="dig me in..." class="search--input">
-            <i class="fa fa-search"></i>
+    <div class="container-fluid searchbar--open" ng-show="!search_toggle">
+        <div class="search--input--container" layout="column">
+            <div>
+                <input type="text" placeholder="dig me in..." class="search--input" ng-change="searchContent(searchKey)" ng-model="searchKey">
+                <i class="material-icons"> search</i>
+            </div>
+            <div ng-show="searchKey">
+                <md-list flex class="custom--search--result">
+                    <md-list-item class="md-3-line" ui-sref="home.content({keyword:item})" ng-repeat="item in copyList" ng-hide="noresult">
+                        <div class="md-list-item-text" layout="row">
+                            <h3>{{item |removeSpace}}</h3>
+                        </div>
+                    </md-list-item>
+                    <div ng-show="noresult" style="padding-left:10%;color:#444">
+                        No result found !
+                    </div>
+                </md-list>
+
+            </div>
+
         </div>
     </div>
 </md-toolbar>

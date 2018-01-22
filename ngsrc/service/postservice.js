@@ -29,7 +29,6 @@
             allPost: function() {
                 var deferred = $q.defer();
 
-                console.log('create post')
                 $http.get('/apidata/allpost').then(function(result) {
                     deferred.resolve(result.data);
                 }, function(err) {

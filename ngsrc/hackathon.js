@@ -159,6 +159,7 @@
                 $rootScope.imgCartHeight = 96;
                 $rootScope.imgCartWidth = 70;
             } */
+            $rootScope.search_toggle = true;
             if (next.name == 'home.newpost')
                 $rootScope.hideFooter = true;
             else

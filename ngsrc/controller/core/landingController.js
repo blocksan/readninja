@@ -3,7 +3,7 @@
     var app = angular.module('hackathon.core.landingController', []);
     app.controller('landingController', ['$scope', '$state', '$rootScope', '$mdDialog', '$http', 'authService', function($scope, $state, $rootScope, $mdDialog, $http, authService) {
         console.log('in landing controller');
-        $scope.search_toggle = true;
+        $rootScope.search_toggle = true;
         $scope.registerError = {
             status: false,
             message: ""
@@ -11,7 +11,26 @@
 
         $scope.toggleSearch = function(param) {
             console.log(param)
-            $scope.search_toggle = param ? true : !$scope.search_toggle;
+            $rootScope.search_toggle = param ? true : !$rootScope.search_toggle;
+        }
+
+
+        var itemList = ["header", "header-of-the-new-blog", "demo purpose"]
+        $scope.copyList = angular.copy(itemList)
+
+        $scope.searchContent = function(text) {
+            $scope.noresult = false;
+            if (text.length) {
+                let searchRegx = new RegExp(text, 'i');
+                $scope.copyList = itemList.filter(item => item.match(searchRegx));
+
+                if (!$scope.copyList.length) {
+                    $scope.noresult = true
+                }
+
+            } else {
+                $scope.copyList = angular.copy(itemList)
+            }
         }
 
         $scope.loginGoogle = function() {
@@ -276,6 +295,11 @@
                 };
                 gapi.auth.signIn(params);
             } */
-    }]);
+    }]).filter('removeSpace', function() {
+        return function(x) {
+            x = x.split('-').join(' ')
+            return x;
+        };
+    });
 
 })();
