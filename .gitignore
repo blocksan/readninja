@@ -2,3 +2,7 @@ node_modules/
 npm-debug.log.*
 public/js/hackathon.*
 public/css/style.*
+public/css/style.css
+public/css/style.css.map
+public/js/hackathon-0.0.0.js
+public/js/hackathon-0.0.0.js.map
