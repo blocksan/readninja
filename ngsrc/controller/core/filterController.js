@@ -53,12 +53,11 @@
         var allPostPromise = postservice.allPost();
         allPostPromise.then(function(response) {
             $scope.posts = response;
-            console.log($scope.posts)
-                /* response.forEach((obj, i) => {
-                    console.log(obj, i)
-                    $scope.users[i] = obj.heading
+            /* response.forEach((obj, i) => {
+                console.log(obj, i)
+                $scope.users[i] = obj.heading
 
-                }); */
+            }); */
             $scope.users = response;
             //console.log(response, 'all post');
 
