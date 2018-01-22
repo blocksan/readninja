@@ -63,9 +63,12 @@
 
         });
 
-        $scope.showPrerenderedDialog = function(ev) {
+        $scope.loginDialog = function(ev, param) {
 
-            $scope.loginTab = true;
+            if (param == 'login')
+                $scope.loginTab = true;
+            else
+                $scope.loginTab = false;
             $mdDialog.show({
                 contentElement: '#myDialog',
                 parent: angular.element(document.body),
