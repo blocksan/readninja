@@ -12,7 +12,7 @@
 </md-content>
 <md-content class="blog--banner--content" ng-if="content && loaded">
     <div class="container">
-        <div layout="row">
+        <div layout="row" hide-xs>
             <div flex="100" class="back--hidden">
                 <div class="blog--banner--advert">
                 </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div layout="row">
+        <div layout="row" hide-xs>
             <div flex="30" class="back--hidden">
                 <div class="blog--banner--writer md-whiteframe-8dp">
                     <div class="writer--img">
@@ -48,14 +48,14 @@
             </div>
             <div flex="70" class="back--hidden banner--img">
 
-                <div class="blog--banner--img md-whiteframe-8dp" style="border-radius:5px;">
+                <div class="blog--banner--img md-whiteframe-4dp" style="border-radius:5px;">
                     <img src="{{post.banner}}" alt="" style="width:100%;height:100%;">
                 </div>
             </div>
 
         </div>
     </div>
-    <div class="container-fluid svg--art--container">
+    <div class="container-fluid svg--art--container" hide-xs>
         <div layout="row">
             <div flex class="back--hidden">
                 <svg class="diagon-alley" viewBox="0 0 100 100" preserveAspectRatio="none">
