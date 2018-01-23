@@ -20,7 +20,7 @@
 
 .ta-editor.ta-html,
 .ta-scroll-window.form-control {
-    min-height: 300px;
+    min-height: 400px;
     height: auto;
     overflow: auto;
     font-family: inherit;
@@ -34,7 +34,7 @@
 
 .btn-toolbar.fixed {
     position: fixed;
-    top: 65px;
+    top: 50px;
     z-index: 111111;
     width: 60%;
     border-bottom: 1px solid #ddd;

@@ -14,20 +14,56 @@
 </style>
 <md-content>
     <div class="container --limited--width">
-        <div layout="column" class="newpost--container" ng-cloak>
-            <div class="banner-div" flex>
-                <img ng-src="{{imageSrc}}" class="banner--blog img-responsive" />
-                <input id="bannerInput" ng-file-select="onFileSelect($files)" type="file" class="file--uploader--hide" ng-model="imageSrc">
-                <md-button class="md-raised banner--button" ng-click="upload()">
-                    Upload Banner (1140 X 600)
-                </md-button>
+        <div layout="column" layout-align="space-around center" style="padding:10%" ng-hide="optionSelected">
+            <h1>Let your words shout !</h1>
+            <div layout="row">
+                <md-button class="md-raised md-warn" ng-click="showCreator('post')">Post</md-button>
+                <md-button class="md-raised md-accent" ng-click="showCreator('article')">Article</md-button>
             </div>
-
-            <input type="text" ng-model="blogHeader" class="blogHeader" placeholder="Header of the Blog"><br>
-            <div text-angular ng-model="htmlcontent" class="editor--controls" flex="70"></div>
         </div>
-        <md-button aria-label="button-label" class="md-rasied" ng-click="saveText()"> save</md-button>
-        <p ng-bind-html="htmlPost"></p>
+        <div ng-show="optionSelected">
+            <md-button aria-label="button-label" class="md-default" style="line-height:1;margin-left:0" ng-click="showOptions()">
+                <i class="material-icons">keyboard_backspace</i>
+            </md-button>
+
+            <div layout="column" class="newpost--container" ng-cloak ng-show="postCreator">
+                <div class="banner-div" flex>
+                    <img ng-src="{{imageSrc}}" class="banner--blog img-responsive" />
+                    <input id="bannerInput" ng-file-select="onFileSelect($files)" type="file" class="file--uploader--hide" ng-model="imageSrc">
+                    <md-button class="md-raised banner--button" ng-click="upload()">
+                        Upload Banner (1140 X 600)
+                    </md-button>
+                </div>
+
+                <input type="text" ng-model="blogHeader" class="blogHeader" placeholder="Header of the Blog"><br>
+
+                <div layout="column">
+                    <div layout="row" layout-align="start center" class="topbar--option--fixed">
+                        <md-button class="md-raised md-primary " ng-click="savePost()">save draft</md-button>
+                        <md-button class="md-raised md-warn">review</md-button>
+                        <md-button class="md-raised md-accent">publish</md-button>
+                    </div>
+                    <div>
+                        <div text-angular ng-model="htmlcontent" class="editor--controls"></div>
+                    </div>
+                </div>
+            </div>
+            <div layout="column" class="newpost--container" ng-cloak ng-show="!postCreator">
+                <input type="text" ng-model="articleBlogHeader" class="blogHeader" placeholder="Header of the Article"><br>
+
+                <div layout="column">
+                    <div layout="row" layout-align="start center" class="topbar--option--fixed">
+                        <md-button class="md-raised md-primary" ng-click="saveArticle()">save draft</md-button>
+                        <md-button class="md-raised md-warn">review</md-button>
+                        <md-button class="md-raised md-accent">publish</md-button>
+                    </div>
+                    <div>
+                        <div text-angular ng-model="articleHtmlContent" class="editor--controls"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <p ng-bind-html="htmlpost"></p> -->
     </div>
 
 </md-content>

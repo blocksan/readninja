@@ -43,7 +43,7 @@
                 $provide.decorator('taOptions', ['taRegisterTool', '$mdDialog', '$delegate',
                     function(taRegisterTool, $mdDialog, taOptions) {
                         taOptions.toolbar = [
-                            ['clear', 'h1', 'h2', 'h3', 'pre', 'quote'],
+                            ['clear', 'h1', 'h2', 'h3', 'p', 'pre', 'quote'],
                             ['ul', 'ol'],
                             ['bold', 'italics'],
                             ['insertLink']

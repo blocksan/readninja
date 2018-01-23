@@ -5,8 +5,8 @@
 
             <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
 
-                <md-toolbar class="md-theme-indigo" style="background:rgb(235, 207, 114)">
-                    <h1 class="md-toolbar-tools">100 Total Results</h1>
+                <md-toolbar class="md-theme-indigo" style="background:rgb(88, 153, 250)">
+                    <h1 class="md-toolbar-tools"><strong> {{displayposts.length}}</strong> &nbsp; posts found</h1>
                 </md-toolbar>
                 <md-content>
                     <fieldset class="standard">
@@ -75,6 +75,7 @@
                             <md-card-content>
                                 <h4>{{post.heading}}</h4>
                             </md-card-content>
+
                         </md-card>
                     </div>
                     <md-collection-pagination class="filtered--contents--pagination" per-page="9" collection="filteredUsers" paginated-collection="displayposts"></md-collection-pagination>

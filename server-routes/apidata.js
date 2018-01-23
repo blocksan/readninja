@@ -61,29 +61,43 @@ router.post('/updateAuthor', authenticate, upload.any(), function(req, res) {
 router.post('/createpost', authenticate, upload.any(), function(req, res) {
     //console.log(req.user._id, req.files, '---------')
 
-
-    Promise.all([cloudinary.uploader.upload(req.files[0].path, { crop: "fill", width: 1100, height: 100 })
-        .then(function(result) {
-            console.log(result);
-            var body = _.pick(req.body, ["heading", "body", "alias", "tags", "difficulty", "likes", "shares", "views", "claps", "type", "readtime", "dateadded", "status", "author", "comments"]);
-            body.user = req.user._id;
-            body.banner = result.secure_url;
-            var post = new posts(body);
-            post.save().then(function(post) {
-                users.findOneAndUpdate({ _id: req.user._id }, { $push: { post_id: post._id } }).exec().then(function() {
-                    res.status(200).send({ msg: 'post created ', post: post });
+    if (req.files.length) {
+        Promise.all([cloudinary.uploader.upload(req.files[0].path, { crop: "fill", width: 1100, height: 100 })
+            .then(function(result) {
+                console.log(result);
+                var body = _.pick(req.body, ["heading", "body", "alias", "tags", "difficulty", "likes", "shares", "views", "claps", "type", "readtime", "dateadded", "status", "author", "comments"]);
+                body.user = req.user._id;
+                body.banner = result.secure_url;
+                var post = new posts(body);
+                post.save().then(function(post) {
+                    users.findOneAndUpdate({ _id: req.user._id }, { $push: { post_id: post._id } }).exec().then(function() {
+                        res.status(200).send({ msg: 'post created ', post: post });
+                    }, function(err) {
+                        res.status(400).send({ err: 'error in creating post' });
+                    });
                 }, function(err) {
-                    res.status(400).send({ err: 'error in creating post' });
+                    console.log(err);
+                    res.status(400).send({ err: err });
                 });
+            }).catch(function(err) {
+                res.status(400).send({ err: 'error in uploading image' });
+            })
+        ])
+    } else {
+        var body = _.pick(req.body, ["heading", "body", "alias", "tags", "difficulty", "likes", "shares", "views", "claps", "type", "readtime", "dateadded", "status", "author", "comments"]);
+        body.user = req.user._id;
+        var post = new posts(body);
+        post.save().then(function(post) {
+            users.findOneAndUpdate({ _id: req.user._id }, { $push: { post_id: post._id } }).exec().then(function() {
+                res.status(200).send({ msg: 'post created ', post: post });
             }, function(err) {
-                console.log(err);
-                res.status(400).send({ err: err });
+                res.status(400).send({ err: 'error in creating post' });
             });
-        }).catch(function(err) {
-            res.status(400).send({ err: 'error in uploading image' });
-        })
-    ])
-
+        }, function(err) {
+            console.log(err);
+            res.status(400).send({ err: err });
+        });
+    }
 });
 router.get('/authorPostsAll', authenticate, function(req, res) {
     mongoose.models.users.aggregate([{
@@ -105,7 +119,7 @@ router.get('/authorPostsAll', authenticate, function(req, res) {
 
 });
 router.get('/allPost', function(req, res) {
-    posts.find().populate({ path: 'author', select: 'username avatar', }).exec(function(err, posts) {
+    posts.find({ 'type': 'tutorial' }).populate({ path: 'author', select: 'username avatar', }).exec(function(err, posts) {
         if (err) res.send({ err: 'error in fetching posts' });
         res.status(200).send(posts);
     });

@@ -30,7 +30,12 @@
             <div flex="70">
                 <div layout="row">
                     <div flex="40" flex-xs="80" class="post--image">
-                        <img ng-src="{{post.banner}}" alt="{{post.heading}}" class="img-responsive">
+
+                        <img ng-src="{{post.banner}}" alt="{{post.heading}}" class="img-responsive" ng-if="post.banner">
+
+                        <img ng-src="img/books.png" alt="{{post.heading}}" ng-if="!post.banner" style="width:unset">
+
+
                     </div>
                     <div flex="60" class="post--name" hide-xs>
 

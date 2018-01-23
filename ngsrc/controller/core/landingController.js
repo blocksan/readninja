@@ -1,7 +1,7 @@
 (function() {
 
     var app = angular.module('hackathon.core.landingController', []);
-    app.controller('landingController', ['$scope', '$state', '$rootScope', '$mdDialog', '$http', 'authService', function($scope, $state, $rootScope, $mdDialog, $http, authService) {
+    app.controller('landingController', ['$scope', '$state', '$rootScope', '$mdDialog', '$http', 'authService', '$mdDialog', '$mdMenu', function($scope, $state, $rootScope, $mdDialog, $http, authService, $mdDialog, $mdMenu) {
         console.log('in landing controller');
         $rootScope.search_toggle = true;
         $scope.registerError = {
@@ -40,6 +40,14 @@
             }, function(err) {})
 
         }
+
+        var originatorEv;
+        $scope.openMenu = function($mdMenu, ev) {
+            originatorEv = ev;
+            $mdMenu.open(ev);
+        }
+
+
         angular.element(document).ready(function() {
             setTimeout(function() {
                 $('.carousel[data-type="multi"] .item').each(function() {
