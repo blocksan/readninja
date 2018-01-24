@@ -31,8 +31,8 @@
                 <div layout="row">
                     <div flex="40" flex-xs="80" class="post--image">
 
-                        <cl-image public-id="{{post.banner_id}}.webp" ng-if="post.banner"  class="img-responsive" alt="{{post.heading}}">
-                            <cl-transformation width="260" height="85" quality="90" crop="scale">
+                        <cl-image public-id="{{post.banner_id}}" ng-if="post.banner"  class="img-responsive" alt="{{post.heading}}">
+                            <cl-transformation width="260" height="85" quality="90" crop="scale" fetchFormat="auto">
                             </cl-transformation>
                         </cl-image>
 
@@ -51,11 +51,11 @@
                 </div>
             </div>
             <div flex="15" class="post--edit--icon">
-                <i class="fa fa-pencil-square-o"></i>
+                <i class="material-icons" style="font-size:1em">mode_edit</i>
             </div>
             <div flex="15" class="post--delete--icon">
-
-                <i class="fa fa-trash-o" ng-click="deleteConfirm($event,post._id)"></i>
+                <i class="material-icons" ng-click="deleteConfirm($event,post._id)" style="font-size:1em">delete</i>
+             
             </div>
         </md-list-item>
     </div>
