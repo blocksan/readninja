@@ -8,6 +8,7 @@
          * time is up.
          */
         $scope.filteredUsers = [];
+        $scope.loading = true;
 
         function debounce(func, wait, context) {
             var timer;
@@ -52,7 +53,7 @@
         var allPostPromise = postservice.allPost(param);
         allPostPromise.then(function(response) {
 
-
+            $scope.loading = false;
             $scope.posts = response;
             /* response.forEach((obj, i) => {
                 console.log(obj, i)

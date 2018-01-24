@@ -3,12 +3,9 @@
     var app = angular.module('hackathon', [
             'ngMaterial',
             'ngMessages',
-            'ui.bootstrap',
             'ui.router',
-            'ngDialog',
-
             'cloudinary',
-            'ui.router.state.events',
+            'ngAnimate',
             'angular-loading-bar',
             'mdCollectionPagination',
             'textAngular',
@@ -27,6 +24,9 @@
             'hackathon.partials.basicSettingsController',
             'hackthaon.partials.postsController',
             'hackathon.directive.prismdirective'
+            /* 'ngDialog', */
+            /* 'ui.bootstrap', */
+            /* 'ui.router.state.events', */
         ])
         .constant('_', window._).config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {}])
         /* .config(function($provide) {

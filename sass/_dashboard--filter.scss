@@ -61,6 +61,13 @@
                 md-card-content {
                     padding: 5px 16px;
                 }
+                &.ng-enter {
+                    transition: all ease-in 0.5s;
+                    opacity: 0;
+                }
+                &.ng-enter-active {
+                    opacity: 1;
+                }
             }
             @media only screen and (max-width: 1240px) {
                 md-card {

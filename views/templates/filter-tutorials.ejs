@@ -1,5 +1,9 @@
 <div class="container-fluid --limited--width" style="padding-top:100px">
-    <div layout="column" class="filter--container" ng-cloak>
+    <div layout="row" layout-align="center center" style="padding:10%" ng-show="loading">
+        <md-progress-circular md-diameter="96"></md-progress-circular>
+    </div>
+    <div layout="column" class="filter--container" ng-cloak ng-hide="loading">
+
         <md-button aria-label="button-label" ng-click="toggleSideNav()" hide-gt-sm> filter </md-button>
         <section layout="row" flex>
 
