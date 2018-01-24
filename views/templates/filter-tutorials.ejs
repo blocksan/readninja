@@ -1,12 +1,12 @@
 <div class="container-fluid --limited--width" style="padding-top:100px">
-    <div ng-controller="filterController as vm" layout="column" class="filter--container" ng-cloak>
+    <div layout="column" class="filter--container" ng-cloak>
         <md-button aria-label="button-label" ng-click="toggleSideNav()" hide-gt-sm> filter </md-button>
         <section layout="row" flex>
 
-            <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')">
+            <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" ng-hide="filterHide">
 
                 <md-toolbar class="md-theme-indigo" style="background:rgb(88, 153, 250)">
-                    <h1 class="md-toolbar-tools"><strong> {{displayposts.length}}</strong> &nbsp; posts found</h1>
+                    <h1 class="md-toolbar-tools"><strong> {{posts.length}}</strong> &nbsp; posts found</h1>
                 </md-toolbar>
                 <md-content>
                     <fieldset class="standard">
@@ -70,7 +70,7 @@
                     </div>
                     <div class='cards--containers' layout="row" layout-wrap>
                         <md-card ng-repeat="post in displayposts" class="md-whiteframe-2dp" ui-sref="home.content({keyword:post.alias})" style="cursor:pointer">
-                            <img ng-src="{{post.banner}}" class="md-card-image" alt="post avatar">
+                            <img ng-src="{{post.banner}}" class="md-card-image" alt="post avatar" ng-if="post.banner">
 
                             <md-card-content>
                                 <h4>{{post.heading}}</h4>

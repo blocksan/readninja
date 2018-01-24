@@ -119,7 +119,7 @@ router.get('/authorPostsAll', authenticate, function(req, res) {
 
 });
 router.get('/allPost', function(req, res) {
-    posts.find({ 'type': 'tutorial' }).populate({ path: 'author', select: 'username avatar', }).exec(function(err, posts) {
+    posts.find({ 'type': req.query.param }).sort({ "dateadded": -1 }).populate({ path: 'author', select: 'username avatar', }).exec(function(err, posts) {
         if (err) res.send({ err: 'error in fetching posts' });
         res.status(200).send(posts);
     });

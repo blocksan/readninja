@@ -10,9 +10,9 @@
         </md-button>
     </div>
 </md-content>
-<md-content class="blog--banner--content" ng-if="content && loaded">
+<md-content class="blog--banner--content" ng-if='content && loaded'>
     <div class="container">
-        <div layout="row" hide-xs>
+        <div layout="row" hide-xs ng-if='post.type==="tutorial"'>
             <div flex="100" class="back--hidden">
                 <div class="blog--banner--advert">
                 </div>
@@ -26,7 +26,7 @@
             </div>
         </div>
 
-        <div layout="row" hide-xs>
+        <div layout="row" hide-xs ng-if='post.type==="tutorial"'>
             <div flex="30" class="back--hidden">
                 <div class="blog--banner--writer md-whiteframe-8dp">
                     <div class="writer--img">
@@ -55,7 +55,7 @@
 
         </div>
     </div>
-    <div class="container-fluid svg--art--container" hide-xs>
+    <div class="container-fluid svg--art--container" hide-xs ng-if='post.type==="tutorial"'>
         <div layout="row">
             <div flex class="back--hidden">
                 <svg class="diagon-alley" viewBox="0 0 100 100" preserveAspectRatio="none">

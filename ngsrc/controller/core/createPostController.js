@@ -1,126 +1,165 @@
 (function() {
     var app = angular.module('hackathon.core.createPostController', []);
-    app.controller('createPostController', ['$scope', 'textAngularManager', 'postservice', '$rootScope', '$window', function($scope, textAngularManager, postservice, $rootScope, $window) {
+    app.controller('createPostController', ['$scope', 'textAngularManager', 'postservice', '$rootScope', '$window', '$state', function($scope, textAngularManager, postservice, $rootScope, $window, $state) {
         console.log('in createPostController');
-        $scope.version = textAngularManager.getVersion();
-        $scope.versionNumber = $scope.version.substring(1);
+        $scope.optionSelected = false;
         $scope.htmlcontent = '';
         $scope.blogHeader = '';
+
+        $scope.readarray = ('< 3 mins | 3- 5 mins | 5 - 10 mins | > 10 mins').split('|');
+        $scope.difficult = ('Easy Medium Hard').split(' ');
+
+        $scope.disabled = false;
+        $scope.postTemp = {};
+
+        var self = this;
+
+        self.readonly = false;
+        self.selectedItem = null;
+        self.searchText = null;
+        self.querySearch = querySearch;
+        self.technogolies = loadTechnologies();
+        $scope.techs = [];
+        self.numberChips = [];
+        self.numberChips2 = [];
+        self.numberBuffer = '';
+        self.autocompleteDemoRequireMatch = true;
+        self.transformChip = transformChip;
+
         //$scope.tempData = {};
         $scope.upload = function() {
             angular.element(document.querySelector('#bannerInput')).click();
         };
 
-        $scope.optionSelected = false;
+
+
         $scope.showCreator = function(param) {
-
+            resetForm();
             $scope.optionSelected = true;
-            if (param == 'post')
+            if (param == 'post') {
                 $scope.postCreator = true
-            else
-                $scope.postCreator = false
+            } else {
 
+                $scope.postCreator = false
+            }
         }
+
         $scope.showOptions = function() {
             $scope.optionSelected = false;
+            resetForm();
         }
 
-        // console.log(angular.element(document.querySelector('.btn-toolbar').getBoundingClientRect().top))
-
-        window.onscroll = function() {
-            var top = angular.element(document.querySelector('.btn-toolbar').getBoundingClientRect().top);
-            var txTop = angular.element(document.querySelector('.ta-bind').getBoundingClientRect().top);
-            if (top[0] < 66 && txTop[0] < 115) {
-                angular.element(document.querySelector('.btn-toolbar')).addClass('fixed');
-                angular.element(document.querySelector('.topbar--option--fixed')).addClass('fixed');
-
-            } else {
-                angular.element(document.querySelector('.btn-toolbar')).removeClass('fixed');
-                angular.element(document.querySelector('.topbar--option--fixed')).removeClass('fixed');
-            }
-        };
-        $scope.disabled = false;
         $scope.savePost = function() {
-            //$scope.htmlPost = $scope.htmlcontent;
             var formData = new FormData();
-            console.log($scope.blogHeader, '----psot')
             var tempData = {
                 "heading": $scope.blogHeader,
                 "alias": $scope.blogHeader.split(' ').join('-'),
                 "body": $scope.htmlcontent,
-                "tags": ["angular", "css"],
-                "banner": document.querySelector('#bannerInput').files[0] || '',
-                "difficulty": "easy",
-                "likes": 0,
-                "shares": 0,
-                "views": 0,
-                "claps": 0,
-                "type": "tutorial",
-                "readtime": 3,
-                "dateadded": Date.now(),
-                "status": "pending",
-                "user": "",
-                "comments": ""
-            }
-
-            for (key in tempData) {
-                formData.append(key, tempData[key])
-            }
-            var createPostPromise = postservice.createPost(formData);
-            createPostPromise.then(function(response) {
-                    console.log(response);
-                    var notify = {
-                        type: 'info',
-                        title: 'Post Created!',
-                        timeout: 2000 //time in ms
-                    };
-                    $scope.$emit('notify', notify);
-                }, function(err) {
-                    console.log(err)
-                })
-                //console.log($scope.htmlcontent);
-        }
-        $scope.saveArticle = function() {
-            //$scope.htmlPost = $scope.htmlcontent;
-            var formData = new FormData();
-
-            var tempData = {
-                "heading": $scope.articleBlogHeader,
-                "alias": $scope.articleBlogHeader.split(' ').join('-'),
-                "body": $scope.articleHtmlContent,
-                "tags": ["angular", "css"],
-                "difficulty": "easy",
                 "likes": 0,
                 "shares": 0,
                 "views": 0,
                 "claps": 0,
                 "type": "article",
-                "readtime": 3,
                 "dateadded": Date.now(),
                 "status": "pending",
                 "user": "",
                 "comments": ""
             }
 
+            if ($scope.postCreator) {
+                tempData.banner = document.querySelector('#bannerInput').files[0] || '';
+                tempData.readtime = $scope.postTemp.readt;
+                tempData.difficulty = $scope.postTemp.diffi;
+                tempData.type = 'tutorial';
+                tempData.tags = $scope.techs;
+            }
+
             for (key in tempData) {
                 formData.append(key, tempData[key])
             }
-            var createPostPromise = postservice.createPost(formData);
-            createPostPromise.then(function(response) {
-                    console.log(response);
-                    var notify = {
-                        type: 'info',
-                        title: 'Post Created!',
-                        timeout: 2000 //time in ms
-                    };
-                    $scope.$emit('notify', notify);
-                }, function(err) {
-                    console.log(err)
-                })
-                //console.log($scope.htmlcontent);
+            postservice.createPost(formData).then(function(response) {
+                var notify = {
+                    type: 'info',
+                    title: 'Post Created!',
+                    timeout: 2000 //time in ms
+                };
+                $scope.$emit('notify', notify);
+                $state.reload();
+            }, function(err) {
+                var notify = {
+                    type: 'error',
+                    title: 'Oops something went wrong!',
+                    timeout: 2000 //time in ms
+                };
+                $scope.$emit('notify', notify);
+            })
         }
 
-        $scope.imageSrc = "";
+        function resetForm() {
+            $scope.blogHeader = null;
+        }
+
+        /**
+         * Return the proper object when the append is called.
+         */
+        function transformChip(chip) {
+            // If it is an object, it's already a known chip
+            if (angular.isObject(chip)) {
+                return chip;
+            }
+
+            // Otherwise, create a new one
+            return { name: chip, type: 'new' }
+        }
+
+        /**
+         * Search for technogolies.
+         */
+        function querySearch(query) {
+            var results = query ? self.technogolies.filter(createFilterFor(query)) : [];
+            return results;
+        }
+
+        /**
+         * Create filter function for a query string
+         */
+        function createFilterFor(query) {
+            var lowercaseQuery = angular.lowercase(query);
+
+            return function filterFn(vegetable) {
+                return (vegetable._lowername.indexOf(lowercaseQuery) === 0);
+            };
+
+        }
+
+        function loadTechnologies() {
+            var techs = [{ name: 'CSS3' }, { name: 'HTML' }, { name: 'Angularjs' }, { name: 'MEAN' }, { name: 'Php' }, { name: 'Selenium' }, { name: 'JAVA' }, { name: 'Heroku' }, { name: 'AWS' }, { name: 'Digital Ocean' }, { name: 'Google Cloud' }];
+
+            return techs.map(function(tech) {
+                tech._lowername = tech.name.toLowerCase();
+                return tech;
+            });
+        }
+
+
+
+        // console.log(angular.element(document.querySelector('.btn-toolbar').getBoundingClientRect().top))
+        if ($state.current.name == 'home.newpost') {
+            window.onscroll = function() {
+                var top = angular.element(document.querySelector('.btn-toolbar').getBoundingClientRect().top);
+                var txTop = angular.element(document.querySelector('.ta-bind').getBoundingClientRect().top);
+                if (top[0] < 66 && txTop[0] < 115) {
+                    angular.element(document.querySelector('.btn-toolbar')).addClass('fixed');
+                    angular.element(document.querySelector('.topbar--option--fixed')).addClass('fixed');
+
+                } else {
+                    angular.element(document.querySelector('.btn-toolbar')).removeClass('fixed');
+                    angular.element(document.querySelector('.topbar--option--fixed')).removeClass('fixed');
+                }
+            };
+        }
+
+
         $scope.$on("fileProgress", function(e, progress) {
             $scope.progress = progress.loaded / progress.total;
         });

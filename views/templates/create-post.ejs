@@ -26,42 +26,80 @@
                 <i class="material-icons">keyboard_backspace</i>
             </md-button>
 
-            <div layout="column" class="newpost--container" ng-cloak ng-show="postCreator">
-                <div class="banner-div" flex>
-                    <img ng-src="{{imageSrc}}" class="banner--blog img-responsive" />
-                    <input id="bannerInput" ng-file-select="onFileSelect($files)" type="file" class="file--uploader--hide" ng-model="imageSrc">
-                    <md-button class="md-raised banner--button" ng-click="upload()">
-                        Upload Banner (1140 X 600)
-                    </md-button>
-                </div>
+            <div layout="column" class="newpost--container" ng-cloak>
+                <form name="postForm">
+                    <div class="banner-div" flex ng-if="postCreator">
+                        <img ng-src="{{imageSrc}}" class="banner--blog img-responsive" />
+                        <input name="bannerImg" id="bannerInput" ng-file-select="onFileSelect($files)" type="file" class="file--uploader--hide" ng-model="imageSrc" required>
 
-                <input type="text" ng-model="blogHeader" class="blogHeader" placeholder="Header of the Blog"><br>
+                        <md-button class="md-raised banner--button" ng-click="upload()">
+                            Upload Banner (1140 X 600)
+                        </md-button>
 
-                <div layout="column">
-                    <div layout="row" layout-align="start center" class="topbar--option--fixed">
-                        <md-button class="md-raised md-primary " ng-click="savePost()">save draft</md-button>
-                        <md-button class="md-raised md-warn">review</md-button>
-                        <md-button class="md-raised md-accent">publish</md-button>
                     </div>
-                    <div>
-                        <div text-angular ng-model="htmlcontent" class="editor--controls"></div>
+                    <div ng-messages="postForm.bannerImg.$error" ng-show="postCreator">
+                        <div ng-message="required">*Banner is required for tutorial.</div>
                     </div>
-                </div>
+                    <!-- <input type="text" name="blogHeader" md-no-asterisk required max-length="100" ng-model="blogHeader" class="blogHeader" placeholder="Header of the Article" ng-show="!postCreator">
+ -->
+                    <md-input-container class="md-block" ng-show="postCreator">
+                        <input type="text" name="blogHeader" required md-maxlength="100" ng-model="blogHeader" class="blogHeader" placeholder="Header of the Tutorial">
+                        <div ng-messages="postForm.blogHeader.$error ">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="md-maxlength">make it crisp to stand out (100 max)</div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="md-block" ng-show="!postCreator">
+                        <input type="text" name="blogHeader" required md-maxlength="100" ng-model="blogHeader" class="blogHeader" placeholder="Header of the Article">
+                        <div ng-messages="postForm.blogHeader.$error ">
+                            <div ng-message="required">This is required.</div>
+                            <div ng-message="md-maxlength">make it crisp to stand out (100 max)</div>
+                        </div>
+                    </md-input-container>
+
+                    <div layout="row" layout-align="space-around center" style="background:#fff" layout-wrap ng-if="postCreator">
+                        <md-input-container class="md-block selection--input">
+                            <label>Reading Time</label>
+                            <md-select ng-model="postTemp.readt" style="height: 50px;" required>
+                                <md-option ng-repeat="readt in readarray" value="{{$index}}">
+                                    {{readt}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container class="md-block selection--input">
+                            <label>Difficulty level</label>
+                            <md-select ng-model="postTemp.diffi" style="height: 50px;" required>
+                                <md-option ng-repeat="diffi in difficult" value="{{diffi}}">
+                                    {{diffi}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-chips ng-model="techs" md-autocomplete-snap md-transform-chip="ctrl.transformChip($chip)" md-require-match="ctrl.autocompleteDemoRequireMatch" required>
+                            <md-autocomplete md-selected-item="ctrl.selectedItem" md-search-text="ctrl.searchText" md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.name" placeholder="Tag technologies">
+                                <span md-highlight-text="ctrl.searchText">{{item.name}}</span>
+                            </md-autocomplete>
+                            <md-chip-template>
+                                <span>
+                                    <strong>{{$chip.name}}</strong>
+                                    </span>
+                            </md-chip-template>
+                        </md-chips>
+                    </div>
+
+                    <div layout="column">
+                        <div layout="row" layout-align="end center" class="topbar--option--fixed">
+                            <md-button ng-disabled="postForm.$invalid" class="md-raised md-warn md-hue-2" ng-click="savePost()">save as draft</md-button>
+                            <md-button ng-disabled="postForm.$invalid" class="md-raised md-accent md-hue-2">review</md-button>
+                            <md-button ng-disabled="postForm.$invalid" class="md-raised md-primary md-hue-2">publish</md-button>
+
+                        </div>
+                        <div>
+                            <div text-angular ng-model="htmlcontent" class="editor--controls" required></div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div layout="column" class="newpost--container" ng-cloak ng-show="!postCreator">
-                <input type="text" ng-model="articleBlogHeader" class="blogHeader" placeholder="Header of the Article"><br>
 
-                <div layout="column">
-                    <div layout="row" layout-align="start center" class="topbar--option--fixed">
-                        <md-button class="md-raised md-primary" ng-click="saveArticle()">save draft</md-button>
-                        <md-button class="md-raised md-warn">review</md-button>
-                        <md-button class="md-raised md-accent">publish</md-button>
-                    </div>
-                    <div>
-                        <div text-angular ng-model="articleHtmlContent" class="editor--controls"></div>
-                    </div>
-                </div>
-            </div>
         </div>
         <!-- <p ng-bind-html="htmlpost"></p> -->
     </div>

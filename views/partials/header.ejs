@@ -3,10 +3,10 @@
         <div>
             <img src="/img/Logomakr_8VnYBN.png" alt="logo readninja" class="logo--readninja--header" ui-sref="home.dashboard">
 
-            <md-button class="md-button md-default header--button" aria-label="tutorials" ng-click="toggleSearch(true)" ui-sref="home.filter">
+            <md-button class="md-button md-default header--button" aria-label="tutorials" ng-click="toggleSearch(true)" ui-sref="home.filter({keyword:'tutorial'})">
                 <span>Tutorials</span>
             </md-button>
-            <md-button class="md-button md-default header--button" aria-label="articles">
+            <md-button class="md-button md-default header--button" aria-label="tutorials" ng-click="toggleSearch(true)" ui-sref="home.filter({keyword:'article'})">
                 <span>Articles</span>
             </md-button>
 
@@ -92,21 +92,38 @@
 
                 </md-dialog-content>
                 <md-dialog-content ng-if="!loginTab">
-                    <div class="md-dialog-content">
-                        <md-input-container class="md-block">
-                            <label>Username</label>
-                            <input name="name" ng-model="formuser.name" md-autofocus required />
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Email</label>
-                            <input name="email" ng-model="formuser.email" md-autofocus required />
-                        </md-input-container>
-                        <md-input-container class="md-block">
-                            <label>Password</label>
-                            <input type="password" name="password" ng-model="formuser.password" required />
-                        </md-input-container>
-                        <span flex></span>
-                    </div>
+                    <form name="signForm">
+                        <div class="md-dialog-content">
+                            <md-input-container class="md-block">
+                                <label>Username</label>
+                                <input name="fname" ng-model="formuser.name" maxlength="12" md-autofocus required>
+                                <div ng-messages="signForm.fname.$error">
+                                    <div ng-message="required">
+                                        Your must choose an username.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Email</label>
+                                <input name="femail" ng-model="formuser.email" ng-pattern="/^.+@.+\..+$/" required>
+                                <div ng-messages="signForm.femail.$error">
+                                    <div ng-message-exp="['required','pattern']">
+                                        Your email must be between 10 and look like an e-mail address.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Password</label>
+                                <input type="password" name="fpassword" ng-model="formuser.password" minlength="6" required>
+                                <div ng-messages="signForm.fpassword.$error">
+                                    <div ng-message-exp="['required','minlength']">
+                                        Your password must be of atleast 6 characters.
+                                    </div>
+                                </div>
+                            </md-input-container>
+                            <span flex></span>
+                        </div>
+                    </form>
 
                 </md-dialog-content>
                 <md-dialog-actions layout="row" ng-if="loginTab">

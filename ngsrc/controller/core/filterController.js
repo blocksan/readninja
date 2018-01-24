@@ -1,7 +1,7 @@
 (function() {
 
     var app = angular.module('hackathon.core.filterController', []);
-    app.controller('filterController', ['$scope', '$state', '$rootScope', '$mdSidenav', 'postservice', function($scope, $state, $rootScope, $mdSidenav, postservice) {
+    app.controller('filterController', ['$scope', '$stateParams', '$state', '$rootScope', '$mdSidenav', 'postservice', function($scope, $stateParams, $state, $rootScope, $mdSidenav, postservice) {
         console.log('in filter controller');
         /**
          * Supplies a function that will continue to operate until the
@@ -41,8 +41,18 @@
 
 
         $scope.users = [];
-        var allPostPromise = postservice.allPost();
+        var param = "tutorial";
+        if ($stateParams.keyword == 'article') {
+            param = $stateParams.keyword;
+            $scope.filterHide = true;
+        } else {
+            param = param;
+            $scope.filterHide = false;
+        }
+        var allPostPromise = postservice.allPost(param);
         allPostPromise.then(function(response) {
+
+
             $scope.posts = response;
             /* response.forEach((obj, i) => {
                 console.log(obj, i)
@@ -54,6 +64,8 @@
 
             $scope.filteredUsers = $scope.users;
             $scope.searchString = '';
+
+            console.log(response);
 
             $scope.search = function() {
                 let nameRegexp = new RegExp($scope.searchString, 'i');

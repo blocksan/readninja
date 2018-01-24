@@ -2,6 +2,7 @@
     'use strict';
     var app = angular.module('hackathon', [
             'ngMaterial',
+            'ngMessages',
             'ui.bootstrap',
             'ui.router',
             'ngDialog',

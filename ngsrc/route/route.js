@@ -26,14 +26,17 @@
                 })
 
             .state('home.filter', {
-                    url: '/filter',
+                    url: '/filter/:keyword',
+                    params: {
+                        keyword: null,
+                    },
                     templateUrl: '/templates/filter',
                     controller: 'filterController'
                 })
                 .state('home.newpost', {
                     url: '/newpost',
                     templateUrl: '/apidata/newpost',
-                    controller: 'createPostController'
+                    controller: 'createPostController as ctrl'
                 })
                 .state('home.profile', {
                     url: '/author',

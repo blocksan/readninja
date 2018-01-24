@@ -26,10 +26,10 @@
                 })
                 return deferred.promise;
             },
-            allPost: function() {
+            allPost: function(fparam) {
                 var deferred = $q.defer();
 
-                $http.get('/apidata/allpost').then(function(result) {
+                $http.get('/apidata/allpost', { params: { param: fparam } }).then(function(result) {
                     deferred.resolve(result.data);
                 }, function(err) {
                     deferred.reject(err.data);
