@@ -28,6 +28,7 @@ router.post('/updateAuthor', authenticate, upload.any(), function(req, res) {
             .then(function(result) {
                 var body = _.pick(req.body, ["name", "avatar", "tagline", "username", "email", "password", "website", "bio", "gitU", "instaU", "fbU", "twitU", "numberposts", "likes", "claps", "tags"]);
                 body.avatar = result.secure_url;
+                body.avatar_id = result.public_id;
                 console.log(body)
                 users.findOneAndUpdate({ _id: req.user._id }, body, { upsert: true }).exec()
                     .then(function(user) {
@@ -68,6 +69,7 @@ router.post('/createpost', authenticate, upload.any(), function(req, res) {
                 var body = _.pick(req.body, ["heading", "body", "alias", "tags", "difficulty", "likes", "shares", "views", "claps", "type", "readtime", "dateadded", "status", "author", "comments"]);
                 body.user = req.user._id;
                 body.banner = result.secure_url;
+                body.banner_id = result.public_id;
                 var post = new posts(body);
                 post.save().then(function(post) {
                     users.findOneAndUpdate({ _id: req.user._id }, { $push: { post_id: post._id } }).exec().then(function() {

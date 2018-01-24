@@ -1,8 +1,11 @@
 <md-toolbar class="md-whiteframe-2dp  md--search--toolbar">
     <div class="md-toolbar-tools" layout="row" layout-align="space-around center">
         <div>
-            <img src="/img/Logomakr_8VnYBN.png" alt="logo readninja" class="logo--readninja--header" ui-sref="home.dashboard">
-
+            <!-- <img src="/img/Logomakr_8VnYBN.png" alt="logo readninja" class="logo--readninja--header" > -->
+            <cl-image public-id="Logomakr_8VnYBN_kloodh.png" ui-sref="home.dashboard" class="logo--readninja--header">
+                <cl-transformation width="130" crop="scale">
+                </cl-transformation>
+            </cl-image>
             <md-button class="md-button md-default header--button" aria-label="tutorials" ng-click="toggleSearch(true)" ui-sref="home.filter({keyword:'tutorial'})">
                 <span>Tutorials</span>
             </md-button>

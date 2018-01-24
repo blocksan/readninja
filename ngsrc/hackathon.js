@@ -6,6 +6,8 @@
             'ui.bootstrap',
             'ui.router',
             'ngDialog',
+
+            'cloudinary',
             'ui.router.state.events',
             'angular-loading-bar',
             'mdCollectionPagination',
@@ -161,7 +163,8 @@
                 $rootScope.imgCartWidth = 70;
             } */
             $rootScope.search_toggle = true;
-            if (next.name == 'home.newpost')
+            console.log(next.name, '---------------------')
+            if (next.name == 'home.newpost' || next.name == 'home.profile.posts' || next.name == 'home.profile.home' || next.name == 'home.profile.settings')
                 $rootScope.hideFooter = true;
             else
                 $rootScope.hideFooter = false;
@@ -203,6 +206,12 @@
             };
         });
     }]);
+    app.config(['cloudinaryProvider', function(cloudinaryProvider) {
+        cloudinaryProvider
+            .set("cloud_name", "ersan")
+            .set("secure", true)
+    }]);
+
     /* app.config(['$crypthmacProvider', function($crypthmacProvider) {
         $crypthmacProvider.setCryptoSecret('8BLOpr0p');
     }]) */

@@ -65,7 +65,7 @@
             $scope.filteredUsers = $scope.users;
             $scope.searchString = '';
 
-            console.log(response);
+            //console.log(response);
 
             $scope.search = function() {
                 let nameRegexp = new RegExp($scope.searchString, 'i');

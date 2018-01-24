@@ -31,7 +31,10 @@
                 <div layout="row">
                     <div flex="40" flex-xs="80" class="post--image">
 
-                        <img ng-src="{{post.banner}}" alt="{{post.heading}}" class="img-responsive" ng-if="post.banner">
+                        <cl-image public-id="{{post.banner_id}}.webp" ng-if="post.banner"  class="img-responsive" alt="{{post.heading}}">
+                            <cl-transformation width="260" height="85" quality="90" crop="scale">
+                            </cl-transformation>
+                        </cl-image>
 
                         <img ng-src="img/books.png" alt="{{post.heading}}" ng-if="!post.banner" style="width:unset">
 

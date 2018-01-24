@@ -59,6 +59,7 @@
 
             </md-sidenav>
 
+
             <md-content flex layout-padding>
 
                 <div layout="column" layout-align="top center" class="filtered--contents">
@@ -70,8 +71,11 @@
                     </div>
                     <div class='cards--containers' layout="row" layout-wrap>
                         <md-card ng-repeat="post in displayposts" class="md-whiteframe-2dp" ui-sref="home.content({keyword:post.alias})" style="cursor:pointer">
-                            <img ng-src="{{post.banner}}" class="md-card-image" alt="post avatar" ng-if="post.banner">
-
+                            <!--<img ng-src="{{post.banner}}" class="md-card-image" alt="post avatar" ng-if="post.banner">-->
+                            <cl-image public-id="{{post.banner_id}}.webp">
+                                <cl-transformation width="360" height="200" quality="90" crop="scale">
+                                </cl-transformation>
+                            </cl-image>
                             <md-card-content>
                                 <h4>{{post.heading}}</h4>
                             </md-card-content>

@@ -49,7 +49,12 @@
             <div flex="70" class="back--hidden banner--img">
 
                 <div class="blog--banner--img md-whiteframe-4dp" style="border-radius:5px;">
-                    <img src="{{post.banner}}" alt="" style="width:100%;height:100%;">
+                    <!--  <img src="{{post.banner}}" alt="" style="width:100%;height:100%;">
+ -->
+                    <cl-image public-id="{{post.banner_id}}.webp">
+                        <cl-transformation width="760" height="500" quality="90" crop="scale">
+                        </cl-transformation>
+                    </cl-image>
                 </div>
             </div>
 

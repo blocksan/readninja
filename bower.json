@@ -17,7 +17,7 @@
     "angular-carousel": "^1.1.0",
     "ngtouch": "^1.0.2",
     "textAngular": "^1.5.16",
-    "cloudinary_ng": "1.x"
+    "cloudinary_ng": "^2.1.2"
   },
   "resolutions": {
     "angular-bootstrap": "^2.5.0",

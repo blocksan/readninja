@@ -25,6 +25,9 @@ var postSchema = new Schema({
         "trim": true,
         //"minlength": 1
     },
+    "banner_id": {
+        "type": String,
+    },
     "difficulty": {
         "type": String,
         //"required": true,
