@@ -23,10 +23,10 @@
             'hackathon.service.authService',
             'hackathon.partials.basicSettingsController',
             'hackthaon.partials.postsController',
-            'hackathon.directive.prismdirective'
+            'hackathon.directive.prismdirective',
             /* 'ngDialog', */
             /* 'ui.bootstrap', */
-            /* 'ui.router.state.events', */
+            'ui.router.state.events',
         ])
         .constant('_', window._).config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {}])
         /* .config(function($provide) {
@@ -168,6 +168,7 @@
                 $rootScope.hideFooter = true;
             else
                 $rootScope.hideFooter = false;
+            console.log(authService.isLoggedIn());
             if (authService.isLoggedIn()) {
 
                 var userPromise = authService.user();
