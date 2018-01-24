@@ -56,5 +56,6 @@
   },
   "_source": "https://github.com/cloudinary/cloudinary_angular.git",
   "_target": "^2.1.2",
-  "_originalSource": "cloudinary_ng"
+  "_originalSource": "cloudinary_ng",
+  "_direct": true
 }
