@@ -163,12 +163,10 @@
                 $rootScope.imgCartWidth = 70;
             } */
             $rootScope.search_toggle = true;
-            console.log(next.name, '---------------------')
             if (next.name == 'home.newpost' || next.name == 'home.profile.posts' || next.name == 'home.profile.home' || next.name == 'home.profile.settings')
                 $rootScope.hideFooter = true;
             else
                 $rootScope.hideFooter = false;
-            console.log(authService.isLoggedIn());
             if (authService.isLoggedIn()) {
 
                 var userPromise = authService.user();

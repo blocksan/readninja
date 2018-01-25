@@ -19,7 +19,7 @@
                     params: param
                 };
                 $http.get('/apidata/getAuthorPost', { params: { param: param } }).then(function(result) {
-                    console.log(result, 'author posts')
+
                     deferred.resolve(result.data);
                 }, function(err) {
                     deferred.reject(err.data);

@@ -52,9 +52,10 @@
             </div>
             <div ng-show="searchKey">
                 <md-list flex class="custom--search--result">
-                    <md-list-item class="md-3-line" ui-sref="home.content({keyword:item})" ng-repeat="item in copyList" ng-hide="noresult">
+                    <md-list-item class="md-3-line" ui-sref="home.content({keyword:item.alias})" ng-repeat="item in copyList" ng-hide="noresult">
                         <div class="md-list-item-text" layout="row">
-                            <h3>{{item |removeSpace}}</h3>
+                            <h3> {{item.heading}}</h3>
+                            <!-- <h3>{{item |removeSpace}}</h3> -->
                         </div>
                     </md-list-item>
                     <div ng-show="noresult" style="padding-left:10%;color:#444">

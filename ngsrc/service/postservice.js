@@ -78,6 +78,24 @@
                     deferred.reject(err.data);
                 });
                 return deferred.promise;
+            },
+            trendingPost: function() {
+                var deferred = $q.defer();
+                $http.get('/apidata/trendingPost').then(function(result) {
+                    deferred.resolve(result.data);
+                }, function(err) {
+                    deferred.reject(err.data);
+                });
+                return deferred.promise;
+            },
+            allPostName: function() {
+                var deferred = $q.defer();
+                $http.get('/apidata/allPostName').then(function(result) {
+                    deferred.resolve(result.data);
+                }, function(err) {
+                    deferred.reject(err.data);
+                });
+                return deferred.promise;
             }
         }
     }])

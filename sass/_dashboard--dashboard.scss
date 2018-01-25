@@ -99,11 +99,14 @@
     }
     .topic--list--header {
         height: 70px;
-        border-bottom: 3px solid #ddd;
+        border-bottom: 1px solid #ddd;
         line-height: 70px;
         margin-bottom: 10px;
         md-list-item {
             padding-left: 0;
+            .material-icons {
+                color: #999;
+            }
         }
         .md-list-item-text {
             h5 {

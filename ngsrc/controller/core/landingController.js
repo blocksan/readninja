@@ -1,28 +1,35 @@
 (function() {
 
     var app = angular.module('hackathon.core.landingController', []);
-    app.controller('landingController', ['$scope', '$state', '$rootScope', '$mdDialog', '$http', 'authService', '$mdDialog', '$mdMenu', function($scope, $state, $rootScope, $mdDialog, $http, authService, $mdDialog, $mdMenu) {
+    app.controller('landingController', ['$scope', '$state', '$rootScope', '$mdDialog', '$http', 'authService', '$mdDialog', 'postservice', function($scope, $state, $rootScope, $mdDialog, $http, authService, $mdDialog, postservice) {
         console.log('in landing controller');
         $rootScope.search_toggle = true;
         $scope.registerError = {
             status: false,
             message: ""
         };
-
         $scope.toggleSearch = function(param) {
-            console.log(param)
             $rootScope.search_toggle = param ? true : !$rootScope.search_toggle;
         }
 
+        //saerch bar
+        // var itemList = ["header", "header-of-the-new-blog", "demo purpose"]
+        var itemList = "";
+        var itemListPromise = postservice.allPostName();
+        itemListPromise.then(function(response) {
+            itemList = response;
+        }, function(error) {
+            console.log(error)
+        })
 
-        var itemList = ["header", "header-of-the-new-blog", "demo purpose"]
         $scope.copyList = angular.copy(itemList)
-
         $scope.searchContent = function(text) {
             $scope.noresult = false;
             if (text.length) {
                 let searchRegx = new RegExp(text, 'i');
-                $scope.copyList = itemList.filter(item => item.match(searchRegx));
+                $scope.copyList = itemList.filter(function(item) {
+                    return item.heading.match(searchRegx)
+                });
 
                 if (!$scope.copyList.length) {
                     $scope.noresult = true
@@ -33,44 +40,38 @@
             }
         }
 
+
+        var allPostPromise = postservice.allPost('all');
+        allPostPromise.then(function(response) {
+            $scope.firstRow = response.slice(0, 3);
+            $scope.secondRow = response.slice(3, 7);
+            $scope.thirdRow = response.slice(7, 10);
+        }, function(error) {
+            console.log(error)
+        });
+        var trendingPostPromise = postservice.trendingPost();
+        trendingPostPromise.then(function(response) {
+            $scope.trendingRow = response;
+        }, function(error) {
+            console.log(error)
+        });
+
+
+
+
         $scope.loginGoogle = function() {
-            console.log('clicked')
             $http.get('/auth/google').then(function(result) {
                 console.log(result, 'logged in')
             }, function(err) {})
 
         }
 
-        var originatorEv;
-        $scope.openMenu = function($mdMenu, ev) {
-            originatorEv = ev;
-            $mdMenu.open(ev);
+        $scope.changeLoginTab = function(param) {
+            if (param == 'register')
+                $scope.loginTab = false;
+            else
+                $scope.loginTab = true;
         }
-
-
-        angular.element(document).ready(function() {
-            setTimeout(function() {
-                $('.carousel[data-type="multi"] .item').each(function() {
-                    var next = $(this).next();
-                    if (!next.length) {
-                        next = $(this).siblings(':first');
-                    }
-                    next.children(':first-child').clone().appendTo($(this));
-
-                    for (var i = 0; i < 4; i++) {
-                        next = next.next();
-                        if (!next.length) {
-                            next = $(this).siblings(':first');
-                        }
-
-                        next.children(':first-child').clone().appendTo($(this));
-                    }
-                });
-            }, 0)
-
-
-        });
-
         $scope.loginDialog = function(ev, param) {
 
             if (param == 'login')
@@ -84,13 +85,6 @@
                 clickOutsideToClose: true
             });
         };
-
-        $scope.changeLoginTab = function(param) {
-            if (param == 'register')
-                $scope.loginTab = false;
-            else
-                $scope.loginTab = true;
-        }
         $scope.formuser = {};
         $scope.register = function() {
             var user = angular.copy($scope.formuser);

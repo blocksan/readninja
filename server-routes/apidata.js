@@ -121,12 +121,35 @@ router.get('/authorPostsAll', authenticate, function(req, res) {
 
 });
 router.get('/allPost', function(req, res) {
-    posts.find({ 'type': req.query.param }).sort({ "dateadded": -1 }).populate({ path: 'author', select: 'username avatar', }).exec(function(err, posts) {
+    if (req.query.param == 'all') {
+        posts.find({ "type": "tutorial" }, { "alias": 1, "likes": 1, "claps": 1, "heading": 1, "difficulty": 1, "banner_id": 1, "user": 1, _id: 0 }).sort({ "dateadded": -1 }).limit(12).populate({ path: 'user', select: 'username avatar', }).exec(function(err, posts) {
+            if (err) res.send({ err: 'error in fetching posts' });
+            res.status(200).send(posts);
+        });
+    } else {
+        posts.find({ 'type': req.query.param }, { "alias": 1, "heading": 1, "banner_id": 1, "user": 1, _id: 0 }).sort({ "dateadded": -1 }).populate({ path: 'user', select: 'username avatar', }).exec(function(err, posts) {
+            if (err) res.send({ err: 'error in fetching posts' });
+            res.status(200).send(posts);
+        });
+    }
+});
+router.get('/trendingPost', function(req, res) {
+
+    posts.find({ "type": "tutorial" }, { "alias": 1, "likes": 1, "claps": 1, "heading": 1, "difficulty": 1, "banner_id": 1, "user": 1, _id: 0 }).sort({ "likes": -1, "claps": -1 }).limit(3).populate({ path: 'user', select: 'username avatar', }).exec(function(err, posts) {
         if (err) res.send({ err: 'error in fetching posts' });
         res.status(200).send(posts);
     });
-
 });
+
+router.get('/allPostName', function(req, res) {
+
+    posts.find({}, { "alias": 1, "heading": 1, _id: 0 }).exec(function(err, posts) {
+        if (err) res.send({ err: 'error in fetching posts' });
+        res.status(200).send(posts);
+    });
+});
+
+
 router.get('/allAuthor', function(req, res) {
     mongoose.models.users.aggregate([{
         $lookup: {
