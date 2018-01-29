@@ -77,7 +77,7 @@
                         <md-card ng-repeat="post in displayposts" class="md-whiteframe-2dp" ui-sref="home.content({keyword:post.alias})" style="cursor:pointer">
                             <!--<img ng-src="{{post.banner}}" class="md-card-image" alt="post avatar" ng-if="post.banner">-->
                             <cl-image public-id="{{post.banner_id}}">
-                                <cl-transformation width="360" height="200" quality="90" crop="scale" fetchFormat="auto">
+                                <cl-transformation width="360" height="200" quality="90" crop="scale" fetch_format="auto">
                                 </cl-transformation>
                             </cl-image>
                             <md-card-content>

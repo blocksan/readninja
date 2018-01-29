@@ -15,8 +15,8 @@
                 <md-card class="md-whiteframe-2dp" ui-sref="home.content({keyword:post.alias})">
                     <md-card-header>
                         <md-card-avatar>
-
-                            <img src="{{post.user.avatar}}" class="md-avatar" />
+                            <!-- 
+                            <img ng-src="{{post.user.avatar}}" class="md-avatar" /> -->
                         </md-card-avatar>
                         <md-card-header-text>
                             <span class="md-title">Angular</span>
@@ -24,7 +24,7 @@
                         </md-card-header-text>
                     </md-card-header>
                     <cl-image public-id="{{post.banner_id}}" class="md-card-image" alt="{{post.heading}}">
-                        <cl-transformation width="360" height="200" quality="90" crop="scale" fetchFormat="auto">
+                        <cl-transformation width="360" height="200" quality="90" crop="scale" fetch_format="auto">
                         </cl-transformation>
                     </cl-image>
                     <md-card-content>
@@ -41,7 +41,7 @@
             <div flex="25" flex-xs="100" ng-repeat="post in secondRow">
                 <md-card class="md-whiteframe-2dp" ui-sref="home.content({keyword:post.alias})">
                     <cl-image public-id="{{post.banner_id}}" class="md-card-image" alt="{{post.heading}}">
-                        <cl-transformation width="300" height="200" quality="90" crop="scale" fetchFormat="auto">
+                        <cl-transformation width="300" height="200" quality="90" crop="scale" fetch_format="auto">
                         </cl-transformation>
                     </cl-image>
                     <!-- <md-card-title>
@@ -66,14 +66,14 @@
                 <md-card class="md-whiteframe-2dp" ui-sref="home.content({keyword:post.alias})">
                     <md-card-header>
                         <md-card-avatar>
-                            <img src="{{post.user.avatar}}" class="md-avatar" />
+                            <img ng-src="{{post.user.avatar}}" class="md-avatar" />
                         </md-card-avatar>
                         <md-card-header-text>
                             <span class="md-title">Angular</span>
                         </md-card-header-text>
                     </md-card-header>
                     <cl-image public-id="{{post.banner_id}}" class="md-card-image" alt="{{post.heading}}">
-                        <cl-transformation width="360" height="200" quality="90" crop="scale" fetchFormat="auto">
+                        <cl-transformation width="360" height="200" quality="90" crop="scale" fetch_format="auto">
                         </cl-transformation>
                     </cl-image>
                     <md-card-content>
@@ -136,7 +136,7 @@
                     </md-card-header-text>
                 </md-card-header>
                 <cl-image public-id="{{post.banner_id}}" class="md-card-image" alt="{{post.heading}}">
-                    <cl-transformation width="362" height="200" quality="90" crop="scale" fetchFormat="auto">
+                    <cl-transformation width="362" height="200" quality="90" crop="scale" fetch_format="auto">
                     </cl-transformation>
                 </cl-image>
                 <md-card-content>
@@ -184,7 +184,7 @@
                     </md-card-header-text>
                 </md-card-header>
                 <cl-image public-id="{{post.banner_id}}" class="md-card-image" alt="{{post.heading}}">
-                    <cl-transformation width="362" height="200" quality="90" crop="scale" fetchFormat="auto">
+                    <cl-transformation width="362" height="200" quality="90" crop="scale" fetch_format="auto">
                     </cl-transformation>
                 </cl-image>
                 <md-card-content>
