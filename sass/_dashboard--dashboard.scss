@@ -91,9 +91,14 @@
     padding-top: 20px;
     background: #fff;
     font-family: 'Nunito', sans-serif;
-    &.grid--list {
-        background: url('/img/back-pattern.png')
+    @media only screen and (max-width: 425px) {
+        .container {
+            padding: 0;
+        }
     }
+    /* &.grid--list {
+        background: url('/img/back-pattern.png')
+    } */
     &.even--list--content {
         background: #eee;
     }
@@ -180,6 +185,9 @@
                 font-family: 'Nunito', sans-serif;
                 font-size: 1.1em;
                 font-weight: 300;
+            }
+            .md-button {
+                min-width: 40px;
             }
         }
         .bottom--options {

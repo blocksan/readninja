@@ -11,20 +11,8 @@
     }
     @media only screen and (max-width: 480px) {
         .logo--readninja--header {
-            width: 80px;
-        }
-    }
-    @media only screen and (max-width: 380px) {
-        .logo--readninja--header {
             width: 75px;
         }
-        .header--button {
-            color: #999;
-            padding: 0px !important;
-            min-width: 60px;
-        }
-    }
-    @media only screen and (max-width:360px) {
         .header--button {
             color: #999;
             span {
