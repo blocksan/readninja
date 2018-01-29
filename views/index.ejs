@@ -6,7 +6,6 @@
     <meta charset="UTF-8">
 
     <title> ReadNinja </title>
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" crossorigin="anonymous">
@@ -23,13 +22,50 @@
     <link rel="stylesheet" href="css/angular-notify-material.min.css" id="notifyTheme">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
     <link rel='stylesheet' href='/css/style.css' />
-
+    <link rel='stylesheet' href='/css/angular-scrollify.css' />
+    <meta name="theme-color" content="#4caf50">
+    <link rel="manifest" href="/manifest.json">
     <base href="/">
 </head>
 
 <body ng-cloak>
 
     <div notifybar style="position:fixed;top:0;right:0;z-index:11111"></div>
+
+    <div ng-cloak>
+        <!-- <div class="scrollify" hj-scrollify="pane in data.panes" hj-scrollify-options="{id: 'myScrollify'}">
+
+            <div class="content" style="background-color: {{pane.color}}" ng-attr-data-text="{{pane.text}}">
+
+                <div ng-if="$index==0">
+                    content 1
+                </div>
+                <div ng-if="$index==1">
+                    content 2
+                </div>
+                <div ng-if="$index==2">
+                    content 3
+                </div>
+                <div ng-if="$index==3}}">
+                    content 4
+                </div>
+                <div ng-if="$index==4">
+                    content 5
+                </div>
+
+                <div style="position:absolute;top:20%;right:0;z-index:111111">
+                    <div class="up" ng-click="goUp($index)">up</div>
+                    <div class="down" ng-click="goDown($index)">down</div>
+                </div>
+            </div>
+
+        </div> -->
+
+        <div class="top" ng-click="top()">☝︎</div>
+    </div>
+
+
+
     <md-content ng-controller="landingController">
         <ng-include src="'partials/header'"></ng-include>
         <div class="ui-view-main" ng-class="!search_toggle ? 'container--fadeMe' : ''" ui-view></div>

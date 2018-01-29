@@ -1,6 +1,13 @@
 <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
+
+<script type="text/javascript" src="bower_components/hamsterjs/hamster.js"></script>
+<script type="text/javascript" src="bower_components/lethargy/lethargy.js"></script>
+<script type="text/javascript" src="bower_components/hammerjs/hammer.js"></script>
+<script type="text/javascript" src="bower_components/angular-scrollify/angular-scrollify.js"></script>
+
+
 <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 <script type="text/javascript" src="/bower_components/lodash/dist/lodash.min.js"></script>
 <script type="text/javascript" src="/bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
@@ -67,7 +74,21 @@
         passive: true
     })
 </script>
-
+<script>
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then((registration) => {
+                console.log('SWorker registered');
+            })
+            .catch((err) => {
+                console.log('SW error', err);
+            });
+    }
+    window.addEventListener('offline', function(e) {
+        // queue up events for server
+        alert('You are offline');
+    }, false);
+</script>
 
 <!-- linking all the angularjs scripts -->
 <script src="js/hackathon-0.0.0.js"></script>
