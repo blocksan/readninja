@@ -56,13 +56,17 @@
                 }).state('home.profile.home', {
                     url: '/home',
                     templateUrl: '/partials/home'
-                });
-            /* 
-                            .state('home.filter', {
-                                url: '/filter',
-                                templateUrl: '/templates/filter',
-                                controller: 'filterController'
-                            }); */
+                }).state('home.writer', {
+                    url: '/writer',
+                    templateUrl: '/templates/writer',
+                    controller: 'writerController'
+                })
+                /* 
+                                .state('home.filter', {
+                                    url: '/filter',
+                                    templateUrl: '/templates/filter',
+                                    controller: 'filterController'
+                                }); */
             $urlRouterProvider
                 .otherwise('/');
 

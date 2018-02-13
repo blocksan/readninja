@@ -110,6 +110,11 @@
             .blog--banner--img {
                 height: auto;
             }
+            .blog--banner--header {
+                h1 {
+                    font-size: 2em;
+                }
+            }
         }
     }
 }
@@ -128,30 +133,20 @@
         font-size: 1.2em;
         .article--engage--buttons {
             border-bottom: 1px solid #ddd;
-            padding-bottom: 20px;
+            padding-bottom: 10px;
             .engage-- {
                 margin: 0px 20px;
                 .md-success {
                     line-height: 0px;
                     padding: 10% 10%;
                     color: #fff;
-                    font-size: 1.05em;
                     background: #28d88f;
                 }
-                .md-clapping {
-                    width: 40px;
-                    height: 40px;
-                    text-align: center;
-                    border-radius: 50%;
-                    background: #02756b;
-                    min-width: 60px;
-                    min-height: 60px;
-                    transition: all 0.3s ease-in-out;
-                    img {
-                        width: 40px;
-                    }
-                    &:hover {
-                        border: 1px solid #f3f751;
+                &.engage--touch {
+                    .md-button {
+                        background: whitesmoke;
+                        color: #444;
+                        line-height: 1;
                     }
                 }
                 &.engage--view {}

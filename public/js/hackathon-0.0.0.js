@@ -1,11 +1,11 @@
-/*! rangdehack - v0.0.0 - 2018-01-18 */(function() {
+/*! readninja - v0.0.0 - 2018-02-14 */(function() {
     'use strict';
     var app = angular.module('hackathon', [
             'ngMaterial',
-            'ui.bootstrap',
+            'ngMessages',
             'ui.router',
-            'ngDialog',
-            'ui.router.state.events',
+            'cloudinary',
+            'ngAnimate',
             'angular-loading-bar',
             'mdCollectionPagination',
             'textAngular',
@@ -21,9 +21,13 @@
             'hackathon.service.postservice',
             'hackathon.service.authorservice',
             'hackathon.service.authService',
-            'hackathon.partials.settingsController',
+            'hackathon.partials.basicSettingsController',
             'hackthaon.partials.postsController',
-            'hackathon.directive.prismdirective'
+            'hackathon.directive.prismdirective',
+            'hackathon.core.writerController',
+            /* 'ngDialog', */
+            /* 'ui.bootstrap', */
+            'ui.router.state.events',
         ])
         .constant('_', window._).config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {}])
         /* .config(function($provide) {
@@ -43,7 +47,7 @@
                 $provide.decorator('taOptions', ['taRegisterTool', '$mdDialog', '$delegate',
                     function(taRegisterTool, $mdDialog, taOptions) {
                         taOptions.toolbar = [
-                            ['clear', 'h1', 'h2', 'h3', 'pre', 'quote'],
+                            ['clear', 'h1', 'h2', 'h3', 'p', 'pre', 'quote'],
                             ['ul', 'ol'],
                             ['bold', 'italics'],
                             ['insertLink']
@@ -122,6 +126,15 @@
             $mdThemingProvider.theme('input', 'default')
                 .primaryPalette('grey')
         });
+    app.run(['$rootScope', '$window', function($rootScope, $window) {
+        //$rootScope.showOnce = true;
+        if ($window.localStorage.getItem('portfolioFox')) {
+            $rootScope.showOnce = false;
+        } else {
+            $rootScope.showOnce = true;
+            $window.localStorage.setItem('portfolioFox', true)
+        }
+    }]);
     app.run(['$rootScope', '$state', '$location', 'authService', '$window', function($rootScope, $state, $location, authService, $window) {
         $rootScope.$on('$stateChangeStart', function(event, next, nextParams, fromState) {
 
@@ -159,7 +172,8 @@
                 $rootScope.imgCartHeight = 96;
                 $rootScope.imgCartWidth = 70;
             } */
-            if (next.name == 'home.newpost')
+            $rootScope.search_toggle = true;
+            if (next.name == 'home.newpost' || next.name == 'home.profile.posts' || next.name == 'home.profile.home' || next.name == 'home.profile.settings')
                 $rootScope.hideFooter = true;
             else
                 $rootScope.hideFooter = false;
@@ -201,6 +215,12 @@
             };
         });
     }]);
+    app.config(['cloudinaryProvider', function(cloudinaryProvider) {
+        cloudinaryProvider
+            .set("cloud_name", "ersan")
+            .set("secure", true)
+    }]);
+
     /* app.config(['$crypthmacProvider', function($crypthmacProvider) {
         $crypthmacProvider.setCryptoSecret('8BLOpr0p');
     }]) */
@@ -342,83 +362,192 @@
                 function(error) {
                     console.log(error)
                 });
+            var viewPostPromise = postservice.viewPost(post_heading);
+            viewPostPromise.then(function(response) {
+                console.log(response, 'viewed post')
+            }, function(error) {
+                console.log(error)
+            });
         } else {
             $scope.content = false;
             $scope.loaded = true;
         }
 
+        $scope.clapPost = function() {
+            var clapPostPromise = postservice.clapPost($scope.post.alias);
+            clapPostPromise.then(function(response) {
+                console.log(response)
+                $scope.post.claps = response.claps;
+            }, function(error) {
+                console.log(error)
+            });
+        }
 
     }]);
 })();
 
 (function() {
     var app = angular.module('hackathon.core.createPostController', []);
-    app.controller('createPostController', ['$scope', 'textAngularManager', 'postservice', '$rootScope', '$window', function($scope, textAngularManager, postservice, $rootScope, $window) {
+    app.controller('createPostController', ['$scope', 'textAngularManager', 'postservice', '$rootScope', '$window', '$state', function($scope, textAngularManager, postservice, $rootScope, $window, $state) {
         console.log('in createPostController');
-        $scope.version = textAngularManager.getVersion();
-        $scope.versionNumber = $scope.version.substring(1);
-        $scope.orightml = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><img class="ta-insert-video" ta-insert-video="http://www.youtube.com/embed/2maA1-mvicY" src="" allowfullscreen="true" width="300" frameborder="0" height="250"/></p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li>Super Easy <b>Theming</b> Options</li><li style="color: green;">Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li class="text-danger">Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE9+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p><h4>Supports non-latin Characters</h4><p>昮朐 魡 燚璒瘭 譾躒鑅, 皾籈譧 紵脭脧 逯郹酟 煃 瑐瑍, 踆跾踄 趡趛踠 顣飁 廞 熥獘 豥 蔰蝯蝺 廦廥彋 蕍蕧螛 溹溦 幨懅憴 妎岓岕 緁, 滍 蘹蠮 蟷蠉蟼 鱐鱍鱕, 阰刲 鞮鞢騉 烳牼翐 魡 骱 銇韎餀 媓幁惁 嵉愊惵 蛶觢, 犝獫 嶵嶯幯 縓罃蔾 魵 踄 罃蔾 獿譿躐 峷敊浭, 媓幁 黐曮禷 椵楘溍 輗 漀 摲摓 墐墆墏 捃挸栚 蛣袹跜, 岓岕 溿 斶檎檦 匢奾灱 逜郰傃</p>';
+        $scope.optionSelected = false;
         $scope.htmlcontent = '';
         $scope.blogHeader = '';
+
+        $scope.readarray = ('< 3 mins | 3- 5 mins | 5 - 10 mins | > 10 mins').split('|');
+        $scope.difficult = ('Easy Medium Hard').split(' ');
+
+        $scope.disabled = false;
+        $scope.postTemp = {};
+
+        var self = this;
+
+        self.readonly = false;
+        self.selectedItem = null;
+        self.searchText = null;
+        self.querySearch = querySearch;
+        self.technogolies = loadTechnologies();
+        $scope.techs = [];
+        self.numberChips = [];
+        self.numberChips2 = [];
+        self.numberBuffer = '';
+        self.autocompleteDemoRequireMatch = true;
+        self.transformChip = transformChip;
+
         //$scope.tempData = {};
         $scope.upload = function() {
             angular.element(document.querySelector('#bannerInput')).click();
         };
 
-        // console.log(angular.element(document.querySelector('.btn-toolbar').getBoundingClientRect().top))
 
-        window.onscroll = function() {
-            var top = angular.element(document.querySelector('.btn-toolbar').getBoundingClientRect().top);
-            var txTop = angular.element(document.querySelector('.ta-bind').getBoundingClientRect().top);
-            if (top[0] < 66 && txTop[0] < 115) {
-                angular.element(document.querySelector('.btn-toolbar')).addClass('fixed');
+
+        $scope.showCreator = function(param) {
+            resetForm();
+            $scope.optionSelected = true;
+            if (param == 'post') {
+                $scope.postCreator = true
             } else {
-                angular.element(document.querySelector('.btn-toolbar')).removeClass('fixed');
-            }
-        };
-        $scope.disabled = false;
-        $scope.saveText = function() {
-            //$scope.htmlPost = $scope.htmlcontent;
-            var formData = new FormData();
 
+                $scope.postCreator = false
+            }
+        }
+
+        $scope.showOptions = function() {
+            $scope.optionSelected = false;
+            resetForm();
+        }
+
+        $scope.savePost = function() {
+            var formData = new FormData();
             var tempData = {
                 "heading": $scope.blogHeader,
                 "alias": $scope.blogHeader.split(' ').join('-'),
                 "body": $scope.htmlcontent,
-                "tags": ["angular", "css"],
-                "banner": document.querySelector('#bannerInput').files[0] || '',
-                "difficulty": "easy",
                 "likes": 0,
                 "shares": 0,
                 "views": 0,
                 "claps": 0,
-                "type": "tutorial",
-                "readtime": 3,
+                "type": "article",
                 "dateadded": Date.now(),
                 "status": "pending",
                 "user": "",
                 "comments": ""
             }
 
+            if ($scope.postCreator) {
+                tempData.banner = document.querySelector('#bannerInput').files[0] || '';
+                tempData.readtime = $scope.postTemp.readt;
+                tempData.difficulty = $scope.postTemp.diffi;
+                tempData.type = 'tutorial';
+                tempData.tags = $scope.techs;
+            }
+
             for (key in tempData) {
                 formData.append(key, tempData[key])
             }
-            var createPostPromise = postservice.createPost(formData);
-            createPostPromise.then(function(response) {
-                    console.log(response);
-                    var notify = {
-                        type: 'info',
-                        title: 'Post Created!',
-                        timeout: 2000 //time in ms
-                    };
-                    $scope.$emit('notify', notify);
-                }, function(err) {
-                    console.log(err)
-                })
-                //console.log($scope.htmlcontent);
+            postservice.createPost(formData).then(function(response) {
+                var notify = {
+                    type: 'info',
+                    title: 'Post Created!',
+                    timeout: 2000 //time in ms
+                };
+                $scope.$emit('notify', notify);
+                $state.reload();
+            }, function(err) {
+                var notify = {
+                    type: 'error',
+                    title: 'Oops something went wrong!',
+                    timeout: 2000 //time in ms
+                };
+                $scope.$emit('notify', notify);
+            })
         }
 
-        $scope.imageSrc = "";
+        function resetForm() {
+            $scope.blogHeader = null;
+        }
+
+        /**
+         * Return the proper object when the append is called.
+         */
+        function transformChip(chip) {
+            // If it is an object, it's already a known chip
+            if (angular.isObject(chip)) {
+                return chip;
+            }
+
+            // Otherwise, create a new one
+            return { name: chip, type: 'new' }
+        }
+
+        /**
+         * Search for technogolies.
+         */
+        function querySearch(query) {
+            var results = query ? self.technogolies.filter(createFilterFor(query)) : [];
+            return results;
+        }
+
+        /**
+         * Create filter function for a query string
+         */
+        function createFilterFor(query) {
+            var lowercaseQuery = angular.lowercase(query);
+
+            return function filterFn(vegetable) {
+                return (vegetable._lowername.indexOf(lowercaseQuery) === 0);
+            };
+
+        }
+
+        function loadTechnologies() {
+            var techs = [{ name: 'CSS3' }, { name: 'HTML' }, { name: 'Angularjs' }, { name: 'MEAN' }, { name: 'Php' }, { name: 'Selenium' }, { name: 'JAVA' }, { name: 'Heroku' }, { name: 'AWS' }, { name: 'Digital Ocean' }, { name: 'Google Cloud' }];
+
+            return techs.map(function(tech) {
+                tech._lowername = tech.name.toLowerCase();
+                return tech;
+            });
+        }
+
+
+
+        // console.log(angular.element(document.querySelector('.btn-toolbar').getBoundingClientRect().top))
+        if ($state.current.name == 'home.newpost') {
+            window.onscroll = function() {
+                var top = angular.element(document.querySelector('.btn-toolbar').getBoundingClientRect().top);
+                var txTop = angular.element(document.querySelector('.ta-bind').getBoundingClientRect().top);
+                if (top[0] < 66 && txTop[0] < 115) {
+                    angular.element(document.querySelector('.btn-toolbar')).addClass('fixed');
+                    angular.element(document.querySelector('.topbar--option--fixed')).addClass('fixed');
+
+                } else {
+                    angular.element(document.querySelector('.btn-toolbar')).removeClass('fixed');
+                    angular.element(document.querySelector('.topbar--option--fixed')).removeClass('fixed');
+                }
+            };
+        }
+
+
         $scope.$on("fileProgress", function(e, progress) {
             $scope.progress = progress.loaded / progress.total;
         });
@@ -499,9 +628,30 @@
 (function() {
 
     var app = angular.module('hackathon.core.dashboardController', []);
-    app.controller('dashboardController', ['$scope', '$state', '$rootScope', function($scope, $state, $rootScope) {
+    app.controller('dashboardController', ['$scope', '$window', '$state', '$rootScope', 'postservice', function($scope, $window, $state, $rootScope, postservice) {
         console.log('in dashboard controller');
 
+        $scope.showOnceDash = function() {
+
+            $window.localStorage.removeItem('portfolioFox');
+            $window.location.reload();
+        };
+        var allPostPromise = postservice.allPost('all');
+        allPostPromise.then(function(response) {
+            $scope.firstRow = response.slice(0, 3);
+            $scope.secondRow = response.slice(3, 7);
+            $scope.thirdRow = response.slice(7, 10);
+
+
+        }, function(error) {
+            console.log(error)
+        });
+        var trendingPostPromise = postservice.trendingPost();
+        trendingPostPromise.then(function(response) {
+            $scope.trendingRow = response;
+        }, function(error) {
+            console.log(error)
+        });
 
         angular.element(document).ready(function() {
 
@@ -521,12 +671,15 @@
 (function() {
 
     var app = angular.module('hackathon.core.filterController', []);
-    app.controller('filterController', ['$scope', '$state', '$rootScope', '$mdSidenav', 'postservice', function($scope, $state, $rootScope, $mdSidenav, postservice) {
+    app.controller('filterController', ['$scope', '$stateParams', '$state', '$rootScope', '$mdSidenav', 'postservice', function($scope, $stateParams, $state, $rootScope, $mdSidenav, postservice) {
         console.log('in filter controller');
         /**
          * Supplies a function that will continue to operate until the
          * time is up.
          */
+        $scope.filteredUsers = [];
+        $scope.loading = true;
+
         function debounce(func, wait, context) {
             var timer;
 
@@ -556,31 +709,34 @@
             }, 200);
         }
 
-        function buildToggler(navID) {
-            return function() {
-                // Component lookup should always be available since we are not using `ng-if`
-                $mdSidenav(navID)
-                    .toggle()
-                    .then(function() {
-                        $log.debug("toggle " + navID + " is done");
-                    });
-            };
-        }
+
 
         $scope.users = [];
-        var allPostPromise = postservice.allPost();
+        var param = "tutorial";
+        if ($stateParams.keyword == 'article') {
+            param = $stateParams.keyword;
+            $scope.filterHide = true;
+        } else {
+            param = param;
+            $scope.filterHide = false;
+        }
+        var allPostPromise = postservice.allPost(param);
         allPostPromise.then(function(response) {
-            $scope.posts = response;
-            console.log($scope.posts)
-                /* response.forEach((obj, i) => {
-                    console.log(obj, i)
-                    $scope.users[i] = obj.heading
 
-                }); */
+            $scope.loading = false;
+            $scope.posts = response;
+            /* response.forEach((obj, i) => {
+                console.log(obj, i)
+                $scope.users[i] = obj.heading
+
+            }); */
             $scope.users = response;
             //console.log(response, 'all post');
+
             $scope.filteredUsers = $scope.users;
             $scope.searchString = '';
+
+            //console.log(response);
 
             $scope.search = function() {
                 let nameRegexp = new RegExp($scope.searchString, 'i');
@@ -591,7 +747,6 @@
         }, function(error) {
             console.log(error)
         });
-        console.log($scope.users);
         //$scope.users = [];
         /* $scope.posts.forEach((obj, i) => {
             $scope.users[i] = obj.heading
@@ -676,59 +831,56 @@
 (function() {
 
     var app = angular.module('hackathon.core.landingController', []);
-    app.controller('landingController', ['$scope', '$state', '$rootScope', '$mdDialog', '$http', 'authService', function($scope, $state, $rootScope, $mdDialog, $http, authService) {
+    app.controller('landingController', ['$scope', '$state', '$rootScope', '$mdDialog', '$http', 'authService', '$mdDialog', 'postservice', function($scope, $state, $rootScope, $mdDialog, $http, authService, $mdDialog, postservice) {
         console.log('in landing controller');
-        $scope.search_toggle = true;
+        $rootScope.search_toggle = true;
         $scope.registerError = {
             status: false,
             message: ""
         };
-
         $scope.toggleSearch = function(param) {
-            console.log(param)
-            $scope.search_toggle = param ? true : !$scope.search_toggle;
+            $rootScope.search_toggle = param ? true : !$rootScope.search_toggle;
         }
 
+        //saerch bar
+        // var itemList = ["header", "header-of-the-new-blog", "demo purpose"]
+        var itemList = "";
+        var itemListPromise = postservice.allPostName();
+        itemListPromise.then(function(response) {
+            itemList = response;
+        }, function(error) {
+            console.log(error)
+        })
+
+        $scope.copyList = angular.copy(itemList)
+        $scope.searchContent = function(text) {
+            $scope.noresult = false;
+            if (text.length) {
+                let searchRegx = new RegExp(text, 'i');
+                $scope.copyList = itemList.filter(function(item) {
+                    return item.heading.match(searchRegx)
+                });
+
+                if (!$scope.copyList.length) {
+                    $scope.noresult = true
+                }
+
+            } else {
+                $scope.copyList = angular.copy(itemList)
+            }
+        }
+
+
+
+
+
+
         $scope.loginGoogle = function() {
-            console.log('clicked')
             $http.get('/auth/google').then(function(result) {
                 console.log(result, 'logged in')
             }, function(err) {})
 
         }
-        angular.element(document).ready(function() {
-            setTimeout(function() {
-                $('.carousel[data-type="multi"] .item').each(function() {
-                    var next = $(this).next();
-                    if (!next.length) {
-                        next = $(this).siblings(':first');
-                    }
-                    next.children(':first-child').clone().appendTo($(this));
-
-                    for (var i = 0; i < 4; i++) {
-                        next = next.next();
-                        if (!next.length) {
-                            next = $(this).siblings(':first');
-                        }
-
-                        next.children(':first-child').clone().appendTo($(this));
-                    }
-                });
-            }, 0)
-
-
-        });
-
-        $scope.showPrerenderedDialog = function(ev) {
-
-            $scope.loginTab = true;
-            $mdDialog.show({
-                contentElement: '#myDialog',
-                parent: angular.element(document.body),
-                targetEvent: ev,
-                clickOutsideToClose: true
-            });
-        };
 
         $scope.changeLoginTab = function(param) {
             if (param == 'register')
@@ -736,6 +888,19 @@
             else
                 $scope.loginTab = true;
         }
+        $scope.loginDialog = function(ev, param) {
+
+            if (param == 'login')
+                $scope.loginTab = true;
+            else
+                $scope.loginTab = false;
+            $mdDialog.show({
+                contentElement: '#myDialog',
+                parent: angular.element(document.body),
+                targetEvent: ev,
+                clickOutsideToClose: true
+            });
+        };
         $scope.formuser = {};
         $scope.register = function() {
             var user = angular.copy($scope.formuser);
@@ -951,7 +1116,24 @@
                 };
                 gapi.auth.signIn(params);
             } */
-    }]);
+    }]).filter('removeSpace', function() {
+        return function(x) {
+            x = x.split('-').join(' ')
+            return x;
+        };
+    }).filter('readTimeFilter', function() {
+        return function(x) {
+            if (x === 0) {
+                return "3 mins"
+            } else if (x === 1)
+                return "3- 5 mins"
+            else if (x === 2) {
+                return "5 - 10 mins"
+            } else if (x === 3) {
+                return "> 10 mins"
+            }
+        };
+    });
 
 })();
 
@@ -970,9 +1152,7 @@
         }, function(err) {
             console.log(err)
         })
-        $scope.upload = function() {
-            angular.element(document.querySelector('#fileInput')).click();
-        };
+
 
         function changeTabFun(param) {
             if (param === 'home.profile.settings') {
@@ -994,8 +1174,117 @@
         $scope.changeTab = function(param) {
             changeTabFun(param)
         }
-        console.log($state.current.name)
     }])
+
+})();
+
+(function() {
+
+    var app = angular.module('hackathon.core.writerController', []);
+    app.controller('writerController', ['$scope', 'authorservice', function($scope, authorservice) {
+        console.log('in writer controller');
+        $scope.filteredWriters = []
+        authorservice.allAuthor().then(function(response) {
+            $scope.filteredWriters = response;
+        }, function(error) {
+            console.log(error);
+        })
+    }])
+
+})();
+
+(function() {
+
+    var app = angular.module('hackathon.partials.basicSettingsController', []);
+    app.controller('basicSettingsController', ['$scope', '$state', '$rootScope', 'authorservice', function($scope, $state, $rootScope, authorservice) {
+            console.log('in settings controller');
+            $scope.basicload = false;
+            $scope.updateLoader = false;
+            var getAuthorInfoPromise = authorservice.getAuthorInfo();
+            getAuthorInfoPromise.then(function(response) {
+                $scope.author = response;
+                $scope.basicload = true;
+                //console.log(response); 
+            }, function(error) {
+                console.log(error)
+            });
+            $scope.upload = function() {
+                angular.element(document.querySelector('#fileInput')).click();
+            };
+            $scope.saveProfile = function() {
+                var formData = new FormData();
+
+                for (key in $scope.author) {
+                    formData.append(key, $scope.author[key])
+                }
+                console.log(document.querySelector('#fileInput').files[0])
+                formData.append('customAvatar', document.querySelector('#fileInput').files[0])
+                $scope.updateLoader = true;
+                var updateAuthorPromise = authorservice.updateAuthor(formData);
+                updateAuthorPromise.then(function(response) {
+                    $scope.updateLoader = false;
+                    var notify = {
+                        type: 'info',
+                        title: 'Profile updated !',
+                        timeout: 2000 //time in ms
+                    };
+                    $scope.$emit('notify', notify);
+                    //$state.reload();
+                }, function(error) {
+                    $scope.updateLoader = false;
+                    console.log(error);
+                });
+            }
+        }])
+        .factory("fileReader", function($q, $log) {
+            var onLoad = function(reader, deferred, scope) {
+                return function() {
+                    scope.$apply(function() {
+
+                        deferred.resolve(reader.result);
+                    });
+                };
+            };
+
+            var onError = function(reader, deferred, scope) {
+                return function() {
+                    scope.$apply(function() {
+                        deferred.reject(reader.result);
+                    });
+                };
+            };
+
+            var onProgress = function(reader, scope) {
+                return function(event) {
+                    scope.$broadcast("fileProgress", {
+                        total: event.total,
+                        loaded: event.loaded
+                    });
+                };
+            };
+
+            var getReader = function(deferred, scope) {
+                var reader = new FileReader();
+                reader.onload = onLoad(reader, deferred, scope);
+                reader.onerror = onError(reader, deferred, scope);
+                reader.onprogress = onProgress(reader, scope);
+                return reader;
+            };
+
+            var readAsDataURL = function(file, scope) {
+                var deferred = $q.defer();
+
+                var reader = getReader(deferred, scope);
+
+                reader.readAsDataURL(file);
+
+                return deferred.promise;
+            };
+
+            return {
+                readAsDataUrl: readAsDataURL
+            };
+        });
 
 })();
 
@@ -1061,43 +1350,6 @@
 
 (function() {
 
-    var app = angular.module('hackathon.partials.settingsController', []);
-    app.controller('settingsController', ['$scope', '$state', '$rootScope', 'authorservice', function($scope, $state, $rootScope, authorservice) {
-        console.log('in settings controller');
-        $scope.basicload = false;
-        $scope.updateLoader = false;
-        var getAuthorInfoPromise = authorservice.getAuthorInfo();
-        getAuthorInfoPromise.then(function(response) {
-            $scope.author = response;
-            $scope.basicload = true;
-            //console.log(response); 
-        }, function(error) {
-            console.log(error)
-        });
-        $scope.saveProfile = function() {
-            console.log('clicked')
-            $scope.updateLoader = true;
-            var updateAuthorPromise = authorservice.updateAuthor($scope.author);
-            updateAuthorPromise.then(function(response) {
-                $scope.updateLoader = false;
-                var notify = {
-                    type: 'info',
-                    title: 'Profile updated !',
-                    timeout: 2000 //time in ms
-                };
-                $scope.$emit('notify', notify);
-                //$state.reload();
-            }, function(error) {
-                $scope.updateLoader = false;
-                console.log(response);
-            })
-        }
-    }]);
-
-})();
-
-(function() {
-
     var app = angular.module('hackathon.directive.prismdirective', []);
     app.directive('prism', [function() {
         return {
@@ -1140,14 +1392,17 @@
                 })
 
             .state('home.filter', {
-                    url: '/filter',
+                    url: '/filter/:keyword',
+                    params: {
+                        keyword: null,
+                    },
                     templateUrl: '/templates/filter',
                     controller: 'filterController'
                 })
                 .state('home.newpost', {
                     url: '/newpost',
                     templateUrl: '/apidata/newpost',
-                    controller: 'createPostController'
+                    controller: 'createPostController as ctrl'
                 })
                 .state('home.profile', {
                     url: '/author',
@@ -1163,17 +1418,21 @@
                 .state('home.profile.settings', {
                     url: '/settings',
                     templateUrl: '/partials/settings',
-                    controller: 'settingsController'
+                    controller: 'basicSettingsController'
                 }).state('home.profile.home', {
                     url: '/home',
                     templateUrl: '/partials/home'
-                });
-            /* 
-                            .state('home.filter', {
-                                url: '/filter',
-                                templateUrl: '/templates/filter',
-                                controller: 'filterController'
-                            }); */
+                }).state('home.writer', {
+                    url: '/writer',
+                    templateUrl: '/templates/writer',
+                    controller: 'writerController'
+                })
+                /* 
+                                .state('home.filter', {
+                                    url: '/filter',
+                                    templateUrl: '/templates/filter',
+                                    controller: 'filterController'
+                                }); */
             $urlRouterProvider
                 .otherwise('/');
 
@@ -1209,18 +1468,20 @@
                     params: param
                 };
                 $http.get('/apidata/getAuthorPost', { params: { param: param } }).then(function(result) {
-                    console.log(result, 'author posts')
+
                     deferred.resolve(result.data);
                 }, function(err) {
                     deferred.reject(err.data);
                 })
                 return deferred.promise;
             },
-            updateAuthor: function(param) {
+            updateAuthor: function(file) {
                 var deferred = $q.defer();
 
-                console.log('create author', param)
-                $http.post('/apidata/updateAuthor', { param: param }).then(function(result) {
+                $http.post('/apidata/updateAuthor', file, {
+                    transformRequest: angular.identity,
+                    headers: { 'Content-Type': undefined }
+                }).then(function(result) {
 
                     deferred.resolve(result.data);
                 }, function(err) {
@@ -1365,7 +1626,6 @@
             },
             createPost: function(file) {
                 var deferred = $q.defer();
-                console.log(file, '-----')
                 $http.post('/apidata/createpost', file, {
                     transformRequest: angular.identity,
                     headers: { 'Content-Type': undefined }
@@ -1376,11 +1636,10 @@
                 })
                 return deferred.promise;
             },
-            allPost: function() {
+            allPost: function(fparam) {
                 var deferred = $q.defer();
 
-                console.log('create post')
-                $http.get('/apidata/allpost').then(function(result) {
+                $http.get('/apidata/allpost', { params: { param: fparam } }).then(function(result) {
                     deferred.resolve(result.data);
                 }, function(err) {
                     deferred.reject(err.data);
@@ -1424,6 +1683,42 @@
                 console.log('delete post')
                 $http.delete('/apidata/deletePost', { params: { param: param } }).then(function(result) {
                     console.log(result, 'deleted')
+                    deferred.resolve(result.data);
+                }, function(err) {
+                    deferred.reject(err.data);
+                });
+                return deferred.promise;
+            },
+            trendingPost: function() {
+                var deferred = $q.defer();
+                $http.get('/apidata/trendingPost').then(function(result) {
+                    deferred.resolve(result.data);
+                }, function(err) {
+                    deferred.reject(err.data);
+                });
+                return deferred.promise;
+            },
+            allPostName: function() {
+                var deferred = $q.defer();
+                $http.get('/apidata/allPostName').then(function(result) {
+                    deferred.resolve(result.data);
+                }, function(err) {
+                    deferred.reject(err.data);
+                });
+                return deferred.promise;
+            },
+            viewPost: function(param) {
+                var deferred = $q.defer();
+                $http.post('/apidata/viewPost', { param: param }).then(function(result) {
+                    deferred.resolve(result.data);
+                }, function(err) {
+                    deferred.reject(err.data);
+                });
+                return deferred.promise;
+            },
+            clapPost: function(param) {
+                var deferred = $q.defer();
+                $http.post('/apidata/clapPost', { param: param }).then(function(result) {
                     deferred.resolve(result.data);
                 }, function(err) {
                     deferred.reject(err.data);

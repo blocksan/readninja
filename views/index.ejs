@@ -12,7 +12,7 @@
     <!--     <link rel="stylesheet" type="text/css" href="/bower_components/angular-bootstrap/ui-bootstrap-csp.css"> -->
     <link rel="stylesheet" type="text/css" href="/bower_components/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="/css/prism.css">
     <!-- 
@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="css/angular-notify-material.min.css" id="notifyTheme">
     <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700" rel="stylesheet">
     <link rel='stylesheet' href='/css/style.css' />
-    <link rel='stylesheet' href='/css/angular-scrollify.css' />
+    <link rel="stylesheet" type="text/css" href="/bower_components/fullpage.js/dist/jquery.fullPage.css" />
     <meta name="theme-color" content="#4caf50">
     <link rel="manifest" href="/manifest.json">
     <base href="/">
@@ -31,42 +31,35 @@
 <body ng-cloak>
 
     <div notifybar style="position:fixed;top:0;right:0;z-index:11111"></div>
-
-    <div ng-cloak>
-        <!-- <div class="scrollify" hj-scrollify="pane in data.panes" hj-scrollify-options="{id: 'myScrollify'}">
-
-            <div class="content" style="background-color: {{pane.color}}" ng-attr-data-text="{{pane.text}}">
-
-                <div ng-if="$index==0">
-                    content 1
-                </div>
-                <div ng-if="$index==1">
-                    content 2
-                </div>
-                <div ng-if="$index==2">
-                    content 3
-                </div>
-                <div ng-if="$index==3}}">
-                    content 4
-                </div>
-                <div ng-if="$index==4">
-                    content 5
-                </div>
-
-                <div style="position:absolute;top:20%;right:0;z-index:111111">
-                    <div class="up" ng-click="goUp($index)">up</div>
-                    <div class="down" ng-click="goDown($index)">down</div>
-                </div>
+    <div id="fullpage" ng-if="showOnce" style="color:white">
+        <div class="section" style="padding:5%;padding-top:0">
+            <div layout="column" layout-align="center center">
+                <h1 class="md-display-4"><strong> Think <br> Post <br> Reward <br> Repeat </strong></h1><br>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa fugiat voluptas quas eveniet dolorem amet sequi aut quasi, quam, tempore nostrum perferendis corrupti, fuga mollitia deserunt atque quibusdam id autem?</p>
+            </div>
+        </div>
+        <div class="section">
+            <div layout="row" layout-align="center center">
+                content 2
+            </div>
+        </div>
+        <div class="section">
+            <div layout="row" layout-align="center center">
+                content 3
+            </div>
+        </div>
+        <div class="section">
+            <div layout="row" layout-align="center center">
+                content 4
+                <md-button aria-label="button-label" class="md-raised md-deafult" id="reloadButton">
+                    skip
+                </md-button>
             </div>
 
-        </div> -->
-
-        <div class="top" ng-click="top()">☝︎</div>
+        </div>
     </div>
 
-
-
-    <md-content ng-controller="landingController">
+    <md-content ng-controller="landingController" ng-if="!showOnce">
         <ng-include src="'partials/header'"></ng-include>
         <div class="ui-view-main" ng-class="!search_toggle ? 'container--fadeMe' : ''" ui-view></div>
         <ng-include src="'partials/footer'" ng-if="!hideFooter"></ng-include>

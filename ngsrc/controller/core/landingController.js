@@ -41,20 +41,6 @@
         }
 
 
-        var allPostPromise = postservice.allPost('all');
-        allPostPromise.then(function(response) {
-            $scope.firstRow = response.slice(0, 3);
-            $scope.secondRow = response.slice(3, 7);
-            $scope.thirdRow = response.slice(7, 10);
-        }, function(error) {
-            console.log(error)
-        });
-        var trendingPostPromise = postservice.trendingPost();
-        trendingPostPromise.then(function(response) {
-            $scope.trendingRow = response;
-        }, function(error) {
-            console.log(error)
-        });
 
 
 
@@ -304,6 +290,18 @@
         return function(x) {
             x = x.split('-').join(' ')
             return x;
+        };
+    }).filter('readTimeFilter', function() {
+        return function(x) {
+            if (x === 0) {
+                return "3 mins"
+            } else if (x === 1)
+                return "3- 5 mins"
+            else if (x === 2) {
+                return "5 - 10 mins"
+            } else if (x === 3) {
+                return "> 10 mins"
+            }
         };
     });
 

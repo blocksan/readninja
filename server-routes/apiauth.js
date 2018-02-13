@@ -10,21 +10,21 @@ function register(req, res) {
     var body = _.pick(req.body, ['email', 'name', 'avatar', 'platform', 'platform_id', 'password', 'type']);
 
     var user = new User(body);
-    user.save().then(function(user) {
+    user.save().then(user => {
 
         //sendConfirmMail(body.name, body.last_name, body.email)
         return user.generateAuthToken();
 
-    }).then(function(token) {
+    }).then(token => {
         //send the token to the header which will always be use to verify
 
         res.header('x-auth', token).json({ user: user, token: token });
-    }).catch(function(err) {
+    }).catch(err => {
         console.log(err);
         if (err.name === 'ValidationError')
-            res.status(400).send({ 'errorname': err.name, 'message': 'name must be filled' })
+            res.status(500).send({ 'errorname': err.name, 'message': 'name must be filled' })
         else if (err.name == 'MongoError' && err.code == 11000)
-            res.status(400).send({ 'errorname': err.name, 'message': err.errmsg, 'code': err.code })
+            res.status(500).send({ 'errorname': err.name, 'message': err.errmsg, 'code': err.code })
     });
 
 }
@@ -53,29 +53,29 @@ function register(req, res) {
 
 router.post('/register', function(req, res) {
     var body = _.pick(req.body, ['email']);
-    User.findEmail(body.email).then(function(user) {
-        res.status(400).send({ 'message': 'Email already exists' })
-    }).catch(function(e) {
+    User.findEmail(body.email).then(user => {
+        res.status(409).json({ 'message': 'Email already exists' })
+    }).catch(() => {
         register(req, res);
     });
 });
 router.post('/login', function(req, res) {
     if (req.body.platform == "facebook") {
         var body = _.pick(req.body, ['email', 'platform_id']);
-        User.findByFabCredentials(body.email, body.platform_id).then(function(user) {
-            return user.generateAuthToken().then(function(token) {
+        User.findByFabCredentials(body.email, body.platform_id).then(user => {
+            return user.generateAuthToken().then(token => {
                 res.header('x-auth', token).json({ user: user, token: token });
             });
-        }).catch(function(e) {
+        }).catch(() => {
             register(req, res);
         });
     } else if (req.body.platform == "google") {
         var body = _.pick(req.body, ['email', 'platform_id']);
-        User.findByFabCredentials(body.email, body.platform_id).then(function(user) {
-            return user.generateAuthToken().then(function(token) {
+        User.findByFabCredentials(body.email, body.platform_id).then(user => {
+            return user.generateAuthToken().then(token => {
                 res.header('x-auth', token).json({ user: user, token: token });
             });
-        }).catch(function(e) {
+        }).catch(() => {
             register(req, res);
         });
     } else {
@@ -84,12 +84,12 @@ router.post('/login', function(req, res) {
             return user.generateAuthToken().then(function(token) {
                 res.header('x-auth', token).json({ user: user, token: token });
             });
-        }).catch(function() {
+        }).catch(() => {
             res.status(400).send({ "err": "username or password incorrect" });
         });
     }
 });
-router.delete('/logout', authenticate, function(req, res) {
+router.delete('/logout', authenticate, (req, res) => {
     User.removeToken(req.user._id, req.token).then(function(response) {
         res.status(200).send();
     }).catch(function(e) {
@@ -98,7 +98,7 @@ router.delete('/logout', authenticate, function(req, res) {
 });
 
 //authenticate based on the token set by header
-router.get('/me', authenticate, function(req, res) {
+router.get('/me', authenticate, (req, res) => {
     res.send(req.user);
 });
 

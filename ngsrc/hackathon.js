@@ -24,6 +24,7 @@
             'hackathon.partials.basicSettingsController',
             'hackthaon.partials.postsController',
             'hackathon.directive.prismdirective',
+            'hackathon.core.writerController',
             /* 'ngDialog', */
             /* 'ui.bootstrap', */
             'ui.router.state.events',
@@ -125,6 +126,15 @@
             $mdThemingProvider.theme('input', 'default')
                 .primaryPalette('grey')
         });
+    app.run(['$rootScope', '$window', function($rootScope, $window) {
+        //$rootScope.showOnce = true;
+        if ($window.localStorage.getItem('portfolioFox')) {
+            $rootScope.showOnce = false;
+        } else {
+            $rootScope.showOnce = true;
+            $window.localStorage.setItem('portfolioFox', true)
+        }
+    }]);
     app.run(['$rootScope', '$state', '$location', 'authService', '$window', function($rootScope, $state, $location, authService, $window) {
         $rootScope.$on('$stateChangeStart', function(event, next, nextParams, fromState) {
 

@@ -40,8 +40,8 @@
                     </div>
                     <ul>
                         <li><i class="fa fa-clock-o" aria-hidden="true"></i>July 09, 2017</li>
-                        <li><i class="fa fa-eye" aria-hidden="true"></i>Views 30,000</li>
-                        <li><i class="fa fa-book" aria-hidden="true"></i>Posts 23</li>
+                        <li><i class="fa fa-eye" aria-hidden="true"></i>Views {{author.likes}}</li>
+                        <li><i class="fa fa-book" aria-hidden="true"></i>Posts {{author.post_id.length}}</li>
 
                     </ul>
                 </div>
@@ -71,38 +71,33 @@
 
     </div>
 </md-content>
-<!-- <div class="container --limited--width">
-    <div layout="column" class="profile--container" ng-cloak>
-        <h1>header</h1><br>
-        <div text-angular ng-model="htmlcontent" class="editor--controls" flex="70"></div>
-    </div>
-    <md-button aria-label="button-label" class="md-rasied" ng-click="saveText()"> save</md-button>
-    <md-button aria-label="button-label" class="md-rasied" ng-click="createAuthor()"> create</md-button>
-
-</div> -->
 <md-content class="blog--article-content" ng-if="content">
     <div class="container-fluid ">
         <div layout="row">
-            <div flex="20">
+            <div flex="20" flex-xs="0">
 
             </div>
-            <div flex="60" class="article--container md-whiteframe-2dp" layout-align="top center" style="background:#fff;">
-                <!-- <div class="article--engage--buttons">
-                    <div layout="row">
+            <div flex="60" flex-xs="100" class="article--container md-whiteframe-2dp" layout-align="top center" style="background:#fff;">
+                <div class="article--engage--buttons">
+                    <div layout="row" layout-align="center center">
                         <div class="engage-- engage--code">
-                            <md-button class="md-raised md-success"><i class="fa fa-code"></i> CODE</md-button>
+                            <md-button class="md-raised md-default"><i class="fas fa-code"></i> CODE</md-button>
                         </div>
-                        <div class="engage-- engage--clap">
-                            <md-button class="md-raised md-clapping"><img src="/img/clapping.svg" alt=""></md-button>
+                        <div class="engage-- engage--touch">
+
+                            <md-button class="md-fab md-default" aria-label="Eat cake" ng-click="clapPost()">
+                                <i class="material-icons">touch_app</i>
+                            </md-button>
+                            {{post.claps}}
                         </div>
-                        <div class="engage-- engage--view"><i class="fa fa-eye" aria-hidden="true"></i> 234</div>
+                        <div class="engage-- engage--view"><i class="fa fa-eye" aria-hidden="true"></i> {{post.views}}</div>
                     </div>
-                </div> -->
+                </div>
 
                 <p ng-bind-html="post.body"></p>
 
             </div>
-            <div flex="20">
+            <div flex="20" flex-xs="0">
 
             </div>
         </div>

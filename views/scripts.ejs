@@ -1,11 +1,7 @@
 <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="/bower_components/fullpage.js/dist/jquery.fullPage.js"></script>
 <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="/bower_components/angular/angular.min.js"></script>
-
-<script type="text/javascript" src="bower_components/hamsterjs/hamster.js"></script>
-<script type="text/javascript" src="bower_components/lethargy/lethargy.js"></script>
-<script type="text/javascript" src="bower_components/hammerjs/hammer.js"></script>
-<script type="text/javascript" src="bower_components/angular-scrollify/angular-scrollify.js"></script>
 
 
 <script type="text/javascript" src="/bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -37,7 +33,20 @@
 
 <!-- Notification library -->
 <script src="/js/angular-notify.min.js"></script>
-
+<script>
+    $(document).ready(function() {
+        $('#fullpage').fullpage({
+            anchors: ['firstPage', 'secondPage', '3rdPage', 'fourthpage'],
+            sectionsColor: ['#f66929', '#1BBC9B', '#7E8F7C', '#2a3a32'],
+            navigation: true,
+            navigationPosition: 'right',
+            navigationTooltips: ['First page', 'Second page', 'Third and last page']
+        });
+        $('#reloadButton').click(function() {
+            window.location.reload();
+        })
+    });
+</script>
 <script>
     window.fbAsyncInit = function() {
         FB.init({
@@ -76,14 +85,14 @@
 </script>
 <script>
     if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js')
-            .then((registration) => {
-                console.log('SWorker registered');
-            })
-            .catch((err) => {
-                console.log('SW error', err);
-            });
-    }
+                                                        navigator.serviceWorker.register('/service-worker.js')
+                                                            .then((registration) => {
+                                                                console.log('SWorker registered');
+                                                            })
+                                                            .catch((err) => {
+                                                                console.log('SW error', err);
+                                                            });
+                                                    }
     window.addEventListener('offline', function(e) {
         // queue up events for server
         console.log('You are offline');

@@ -1,0 +1,101 @@
+<div class="container-fluid --limited--width" style="padding-top:100px">
+    <div layout="row" layout-align="center center" style="padding:10%" ng-show="loading">
+        <md-progress-circular md-diameter="96"></md-progress-circular>
+    </div>
+    <div layout="column" class="filter--container" ng-cloak ng-hide="loading">
+
+        <md-button aria-label="button-label" ng-click="toggleSideNav()" hide-gt-sm> filter </md-button>
+        <section layout="row" flex>
+
+            <md-sidenav class="md-sidenav-left" md-component-id="left" md-is-locked-open="$mdMedia('gt-sm')" ng-hide="filterHide">
+
+                <md-toolbar class="md-theme-indigo" style="background:rgb(88, 153, 250)">
+                    <h1 class="md-toolbar-tools"><strong> {{posts.length}}</strong> &nbsp; posts found</h1>
+                </md-toolbar>
+                <md-content>
+                    <fieldset class="standard">
+                        <legend> Category </legend>
+                        <div layout-wrap layout-gt-sm="row">
+                            <div flex-gt-sm="100" ng-repeat="category in filters.category">
+                                <md-checkbox ng-checked="existsCat(category, selectedCat)" ng-click="toggleCat(category, selectedCat)" aria-label="{{category}}">
+                                    {{category}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="standard tags--filter">
+                        <legend> Tags </legend>
+                        <div layout-wrap layout-gt-sm="row" class="tags--checkboxes">
+                            <div flex-gt-sm="100" ng-repeat="tag in filters.tags">
+                                <md-checkbox ng-checked="existsTag(tag, selectedTag)" ng-click="toggleTag(tag, selectedTag)" aria-label="{{tag}}" class="md-primary">
+                                    {{tag}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="standard">
+                        <legend> Difficulty </legend>
+                        <md-radio-group>
+
+                            <md-radio-button ng-repeat="difficult in filters.difficulty" value="{{difficult}}" ng-click="toggleEye(difficult)" class="md-primary">{{difficult}}</md-radio-button>
+
+                        </md-radio-group>
+                    </fieldset>
+                    <fieldset class="standard">
+                        <legend> Eye Stress </legend>
+                        <md-radio-group>
+
+                            <md-radio-button value="read_slab1" ng-click="toggleDifficult('read_slab1')" class="md-primary">All</md-radio-button>
+                            <md-radio-button value="read_slab2" ng-click="toggleDifficult('read_slab2')" class="md-primary">
+                                < 3 mins</md-radio-button>
+                                    <md-radio-button value="read_slab3" ng-click="toggleDifficult('read_slab3')" class="md-primary">3- 5 mins</md-radio-button>
+                                    <md-radio-button value="read_slab4" ng-click="toggleDifficult('read_slab4')" class="md-primary">5-10 mins</md-radio-button>
+                                    <md-radio-button value="read_slab5" ng-click="toggleDifficult('read_slab5')" class="md-primary">> 10 mins</md-radio-button>
+
+                        </md-radio-group>
+                    </fieldset>
+                    <md-toolbar layout-padding class="md-theme-indigo" style="background:#fff;">
+                        <md-button class="md-raised md-warn" aria-label="Learn More">
+                            reset
+                        </md-button>
+                    </md-toolbar>
+                </md-content>
+
+            </md-sidenav>
+
+
+            <md-content flex layout-padding>
+
+                <div layout="column" layout-align="top center" class="filtered--contents">
+                    <div class="filter--search">
+                        <md-input-container class="md-block filter--search--input" flex-gt-sm>
+                            <label><i class="material-icons" style="font-size: 1em">search</i> Filter</label>
+                            <input ng-model="searchString" ng-change="search()">
+                        </md-input-container>
+                    </div>
+                    <div class='cards--containers' layout="row" layout-wrap>
+                    
+                        <md-card ng-repeat="post in displayposts" class="md-whiteframe-2dp" ui-sref="home.content({keyword:post.alias})" style="cursor:pointer">
+                            <!--<img ng-src="{{post.banner}}" class="md-card-image" alt="post avatar" ng-if="post.banner">-->
+                            <cl-image public-id="{{post.banner_id}}">
+                                <cl-transformation width="360" height="200" quality="90" crop="scale" fetch_format="auto">
+                                </cl-transformation>
+                            </cl-image>
+                            <md-card-content>
+                                <h4>{{post.heading}}</h4>
+                            </md-card-content>
+
+                        </md-card>
+                    </div>
+                    <md-collection-pagination class="filtered--contents--pagination" per-page="9" collection="filteredUsers" paginated-collection="displayposts"></md-collection-pagination>
+                </div>
+
+                <div flex></div>
+
+            </md-content>
+
+
+        </section>
+
+    </div>
+</div>

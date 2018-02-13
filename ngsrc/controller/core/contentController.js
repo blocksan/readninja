@@ -133,11 +133,26 @@
                 function(error) {
                     console.log(error)
                 });
+            var viewPostPromise = postservice.viewPost(post_heading);
+            viewPostPromise.then(function(response) {
+                console.log(response, 'viewed post')
+            }, function(error) {
+                console.log(error)
+            });
         } else {
             $scope.content = false;
             $scope.loaded = true;
         }
 
+        $scope.clapPost = function() {
+            var clapPostPromise = postservice.clapPost($scope.post.alias);
+            clapPostPromise.then(function(response) {
+                console.log(response)
+                $scope.post.claps = response.claps;
+            }, function(error) {
+                console.log(error)
+            });
+        }
 
     }]);
 })();

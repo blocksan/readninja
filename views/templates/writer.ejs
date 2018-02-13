@@ -1,0 +1,48 @@
+<div class="container-fluid --limited--width" style="padding-top:100px">
+    <div layout="row" layout-align="center center" style="padding:10%" ng-show="loading">
+        <md-progress-circular md-diameter="96"></md-progress-circular>
+    </div>
+    <div layout="row" ng-show="!loading" layout-wrap>
+        <md-content flex layout-padding>
+
+            <div layout="column" layout-align="top center" class="writer--all--container">
+                <div class="filter--search">
+                    <md-input-container class="md-block filter--search--input" flex-gt-sm>
+                        <label><i class="material-icons" style="font-size: 1em">search</i> Filter</label>
+                        <input ng-model="searchString" ng-change="search()">
+                    </md-input-container>
+                </div>
+                <div class='cards--containers' layout="row" layout-wrap style="width:100%;margin:5px">
+                    <md-card flex="25" flex-xs="100" ng-repeat="author in displaywriters" class="md-whiteframe-2dp" ui-sref="home.content({keyword:author.alias})" style="cursor:pointer">
+                        <img ng-src="{{author.avatar}}" class="md-card-image" alt="post avatar" style="width:100px;height:100px;border-radius:50%;margin:auto;padding:10px;">
+                        <!-- <cl-image public-id="{{post.banner_id}}">
+                                <cl-transformation width="360" height="200" quality="90" crop="scale" fetch_format="auto">
+                                </cl-transformation>
+                            </cl-image> -->
+                        <div layout="column" layout-align="space-around center">
+                            <h2>{{author.username}}</h2>
+                            <h4 style="margin-top:0">{{author.name}}</h4>
+                        </div>
+
+                        <div layout="row" layout-align="space-around center">
+                            <div>
+                                Likes : {{author.likes}}
+                            </div>
+                            <div>
+                                Claps : {{author.claps}}
+                            </div>
+                        </div>
+                        <div layout="row" layout-align="center center">
+                            <h4>Posts: <strong>{{author.post_id.length}}</strong> </h4>
+                        </div>
+
+                    </md-card>
+                </div>
+                <md-collection-pagination class="filtered--contents--pagination" per-page="162" collection="filteredWriters" paginated-collection="displaywriters"></md-collection-pagination>
+            </div>
+
+            <div flex></div>
+
+        </md-content>
+    </div>
+</div>

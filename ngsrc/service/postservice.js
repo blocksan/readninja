@@ -96,6 +96,24 @@
                     deferred.reject(err.data);
                 });
                 return deferred.promise;
+            },
+            viewPost: function(param) {
+                var deferred = $q.defer();
+                $http.post('/apidata/viewPost', { param: param }).then(function(result) {
+                    deferred.resolve(result.data);
+                }, function(err) {
+                    deferred.reject(err.data);
+                });
+                return deferred.promise;
+            },
+            clapPost: function(param) {
+                var deferred = $q.defer();
+                $http.post('/apidata/clapPost', { param: param }).then(function(result) {
+                    deferred.resolve(result.data);
+                }, function(err) {
+                    deferred.reject(err.data);
+                });
+                return deferred.promise;
             }
         }
     }])

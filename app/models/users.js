@@ -12,7 +12,6 @@ var UserSchema = new Schema({
     "avatar": {
         "type": String,
         "trim": true,
-        "minlength": 1
     },
     "tagline": {
         "type": String,

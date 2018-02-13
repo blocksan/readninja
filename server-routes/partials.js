@@ -3,24 +3,19 @@ var router = express.Router();
 
 /* GET partials . */
 
-router.get('/header', function(req, res, next) {
-
+router.get('/header', (req, res, next) => {
     res.render('partials/header');
 });
-router.get('/footer', function(req, res, next) {
-
+router.get('/footer', (req, res, next) => {
     res.render('partials/footer');
 });
-router.get('/postsTabs', function(req, res, next) {
-
+router.get('/postsTabs', (req, res, next) => {
     res.render('partials/posts--tabs--container');
 });
-router.get('/settings', function(req, res, next) {
-
+router.get('/settings', (req, res, next) => {
     res.render('partials/basic--info');
 });
-router.get('/home', function(req, res, next) {
-
+router.get('/home', (req, res, next) => {
     res.render('partials/home--author--container');
 });
-module.exports = { router: router };
+module.exports = { router };

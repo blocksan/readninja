@@ -157,22 +157,25 @@
             }
             md-card-header-text {
                 height: auto;
-                line-height: 30px;
             }
         }
         md-card-header-text {
+            color: #aaa;
+            .md-subhead {
+                font-size: 10px;
+            }
             &.push--me--right {
                 span {
-                    font-size: 14px;
-                    height: 20px;
-                    line-height: 18px;
+                    font-size: 12px;
                     .small--tags {
                         margin: 0;
                         min-height: 10px;
                         max-height: 27px;
                         line-height: 22px;
+                        padding: 2px 10px;
+                        border-radius: 2px;
                         &.easy--tag {
-                            background: green;
+                            background: #e3ba41;
                             color: white;
                         }
                     }
@@ -193,6 +196,12 @@
         .bottom--options {
             border-top: 1px solid #ddd;
             padding: 0;
+            label {
+                padding: 5px;
+                color: #aaa;
+                margin: 5px 10px;
+                font-weight: normal;
+            }
             i {
                 font-size: 15px;
             }
