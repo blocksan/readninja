@@ -167,7 +167,7 @@
                         user.type = "author";
                         FB.api('/me/picture?width=180&height=180', function(response) {
                             //console.log(response);
-                            user.avatar = response.data.url ? response.data.url : "";
+                            user.avatar = response.data ? response.data.url : "";
                             if (type == 'register') {
                                 var registerPromise = authService.register(user);
                                 registerPromise.then(function(result) {

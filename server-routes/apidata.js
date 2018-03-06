@@ -387,10 +387,10 @@ router.get('/getfilterkeys', function(req, res) {
         .catch(err => res.status(400).json({ error: err }));
 
 });
-router.get('/newpost', authenticate, function(req, res, next) {
+router.get('/newpost', authenticate, (req, res, next) => {
     res.render('templates/create-post');
 });
-router.post('/savePostContentImg', upload.any(), function(req, res, next) {
+router.post('/savePostContentImg', upload.any(), (req, res, next) => {
 
     Promise.all([cloudinary.uploader.upload(req.files[0].path, { crop: "fill", width: 1100, height: 100 })
         .then(result => {
