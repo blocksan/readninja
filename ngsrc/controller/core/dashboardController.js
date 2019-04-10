@@ -4,11 +4,11 @@
     app.controller('dashboardController', ['$scope', '$window', '$state', '$rootScope', 'postservice', function($scope, $window, $state, $rootScope, postservice) {
         console.log('in dashboard controller');
 
-        $scope.showOnceDash = function() {
+        // $scope.showOnceDash = function() {
 
-            $window.localStorage.removeItem('portfolioFox');
-            $window.location.reload();
-        };
+        //     $window.localStorage.removeItem('portfolioFox');
+        //     $window.location.reload();
+        // };
         var allPostPromise = postservice.allPost('all');
         allPostPromise.then(function(response) {
             $scope.firstRow = response.slice(0, 3);

@@ -31,35 +31,7 @@
 <body ng-cloak>
 
     <div notifybar style="position:fixed;top:0;right:0;z-index:11111"></div>
-    <div id="fullpage" ng-if="showOnce" style="color:white">
-        <div class="section" style="padding:5%;padding-top:0">
-            <div layout="column" layout-align="center center">
-                <h1 class="md-display-4"><strong> Think <br> Post <br> Reward <br> Repeat </strong></h1><br>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa fugiat voluptas quas eveniet dolorem amet sequi aut quasi, quam, tempore nostrum perferendis corrupti, fuga mollitia deserunt atque quibusdam id autem?</p>
-            </div>
-        </div>
-        <div class="section">
-            <div layout="row" layout-align="center center">
-                content 2
-            </div>
-        </div>
-        <div class="section">
-            <div layout="row" layout-align="center center">
-                content 3
-            </div>
-        </div>
-        <div class="section">
-            <div layout="row" layout-align="center center">
-                content 4
-                <md-button aria-label="button-label" class="md-raised md-deafult" id="reloadButton">
-                    skip
-                </md-button>
-            </div>
-
-        </div>
-    </div>
-
-    <md-content ng-controller="landingController" ng-if="!showOnce">
+    <md-content ng-controller="landingController">
         <ng-include src="'partials/header'"></ng-include>
         <div class="ui-view-main" ng-class="!search_toggle ? 'container--fadeMe' : ''" ui-view></div>
         <ng-include src="'partials/footer'" ng-if="!hideFooter"></ng-include>
