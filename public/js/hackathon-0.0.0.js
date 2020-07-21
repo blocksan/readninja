@@ -1,4 +1,4 @@
-/*! readninja - v0.0.0 - 2018-02-14 */(function() {
+/*! readninja - v0.0.0 - 2018-08-22 */(function() {
     'use strict';
     var app = angular.module('hackathon', [
             'ngMaterial',
@@ -126,15 +126,15 @@
             $mdThemingProvider.theme('input', 'default')
                 .primaryPalette('grey')
         });
-    app.run(['$rootScope', '$window', function($rootScope, $window) {
-        //$rootScope.showOnce = true;
-        if ($window.localStorage.getItem('portfolioFox')) {
-            $rootScope.showOnce = false;
-        } else {
-            $rootScope.showOnce = true;
-            $window.localStorage.setItem('portfolioFox', true)
-        }
-    }]);
+    // app.run(['$rootScope', '$window', function($rootScope, $window) {
+    //     //$rootScope.showOnce = true;
+    //     if ($window.localStorage.getItem('portfolioFox')) {
+    //         $rootScope.showOnce = false;
+    //     } else {
+    //         $rootScope.showOnce = true;
+    //         $window.localStorage.setItem('portfolioFox', true)
+    //     }
+    // }]);
     app.run(['$rootScope', '$state', '$location', 'authService', '$window', function($rootScope, $state, $location, authService, $window) {
         $rootScope.$on('$stateChangeStart', function(event, next, nextParams, fromState) {
 
@@ -631,11 +631,11 @@
     app.controller('dashboardController', ['$scope', '$window', '$state', '$rootScope', 'postservice', function($scope, $window, $state, $rootScope, postservice) {
         console.log('in dashboard controller');
 
-        $scope.showOnceDash = function() {
+        // $scope.showOnceDash = function() {
 
-            $window.localStorage.removeItem('portfolioFox');
-            $window.location.reload();
-        };
+        //     $window.localStorage.removeItem('portfolioFox');
+        //     $window.location.reload();
+        // };
         var allPostPromise = postservice.allPost('all');
         allPostPromise.then(function(response) {
             $scope.firstRow = response.slice(0, 3);
@@ -997,7 +997,7 @@
                         user.type = "author";
                         FB.api('/me/picture?width=180&height=180', function(response) {
                             //console.log(response);
-                            user.avatar = response.data.url ? response.data.url : "";
+                            user.avatar = response.data ? response.data.url : "";
                             if (type == 'register') {
                                 var registerPromise = authService.register(user);
                                 registerPromise.then(function(result) {
